@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav.xml"
+    app:startDestination="@id/noteListFragment">
+
+
+    <fragment
+        android:id="@+id/noteListFragment"
+        android:name="com.judahben149.note.fragments.NoteListFragment"
+        android:label="Notes"
+        tools:layout="@layout/fragment_note_list" >
+        <action
+            android:id="@+id/action_noteListFragment_to_addNoteFragment"
+            app:destination="@id/addNoteFragment" />
+        <action
+            android:id="@+id/action_noteListFragment_to_noteDetailsFragment"
+            app:destination="@id/noteDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteNoteListFragment"
+        android:name="com.judahben149.note.fragments.FavoriteNoteListFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorite_note_list" />
+    <fragment
+        android:id="@+id/privateNoteListFragment"
+        android:name="com.judahben149.note.fragments.PrivateNoteListFragment"
+        android:label="Private"
+        tools:layout="@layout/fragment_private_note_list" />
+    <fragment
+        android:id="@+id/deletedNoteListFragment"
+        android:name="com.judahben149.note.fragments.DeletedNotesListFragment"
+        android:label="Trash"
+        tools:layout="@layout/fragment_deleted_note_list" >
+        <action
+            android:id="@+id/action_deletedNoteListFragment_to_deletedNoteDetailsFragment"
+            app:destination="@id/deletedNoteDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNoteFragment"
+        android:name="com.judahben149.note.fragments.AddNoteFragment"
+        android:label="Create note"
+        tools:layout="@layout/fragment_add_note">
+        <action
+            android:id="@+id/action_addNoteFragment_to_noteListFragment"
+            app:destination="@id/noteListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteDetailsFragment"
+        android:name="com.judahben149.note.fragments.NoteDetailsFragment"
+        android:label="Edit note"
+        tools:layout="@layout/fragment_note_details">
+        <action
+            android:id="@+id/action_noteDetailsFragment_to_noteListFragment"
+            app:destination="@id/noteListFragment" />
+        <argument
+            android:name="NoteDetails"
+            app:argType="com.judahben149.note.model.Note" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment2"
+        android:name="com.judahben149.note.fragments.SettingsFragment"
+        android:label="Settings" />
+    <fragment
+        android:id="@+id/deletedNoteDetailsFragment"
+        android:name="com.judahben149.note.fragments.DeletedNoteDetailsFragment"
+        android:label="DeletedNoteDetailsFragment"
+        tools:layout="@layout/fragment_note_details">
+        <action
+            android:id="@+id/action_deletedNoteDetailsFragment_to_deletedNoteListFragment"
+            app:destination="@id/deletedNoteListFragment" />
+        <argument
+            android:name="DeletedNote"
+            app:argType="com.judahben149.note.model.Note" />
+    </fragment>
+</navigation>

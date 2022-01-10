@@ -1,0 +1,34 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Note" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/light_blue</item>
+        <item name="colorPrimaryVariant">@color/dark_blue</item>
+        <item name="colorOnPrimary">@color/grey_tint</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/amber</item>
+        <item name="colorSecondaryVariant">@color/amber</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Customize your theme here. -->
+        <item name="noteTitleColor">#00E1CE</item>
+        <item name="searchViewOutline">@color/light_blue</item>
+        <item name="toolBarColor">#323232</item>
+
+    </style>
+
+    <style name="NoteTitle" parent="TextAppearance.AppCompat.Body1">
+        <item name="textColor">?noteTitleColor</item>
+    </style>
+
+
+    <style name="myFAB" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/light_blue</item>
+        <item name="elevation">10dp</item>
+        <item name="borderWidth">0dp</item>
+    </style>
+</resources>

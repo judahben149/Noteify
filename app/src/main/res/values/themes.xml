@@ -1,0 +1,48 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Note" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/light_blue</item>
+        <item name="colorPrimaryVariant">@color/dark_blue</item>
+        <item name="colorOnPrimary">#000000</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/amber</item>
+        <item name="colorSecondaryVariant">@color/amber</item>
+        <item name="colorOnSecondary">@color/light_blue</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/cyan</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Customize your theme here. -->
+        <item name="searchViewOutline">@color/light_blue</item>
+        <item name="toolBarColor">@color/white</item>
+    </style>
+
+
+    <style name="Base.Widget.AppCompat.Button" parent="Widget.Material3.Button">
+
+        <item name="colorButtonNormal">@color/white</item>
+        <item name="android:textColor">@color/dark_blue</item>
+    </style>
+
+    <style name="myFAB" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/white</item>
+        <item name="elevation">10dp</item>
+        <item name="borderWidth">0dp</item>
+    </style>
+
+
+    <style name="MyButtonStyle_Primary" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="backgroundTint">@color/blue_tint</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:elevation">@dimen/button_elevation</item>
+    </style>
+
+
+    <style name="MyButtonStyle_Secondary" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="backgroundTint">@color/grey_tint</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:elevation">@dimen/button_elevation</item>
+    </style>
+</resources>

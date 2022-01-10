@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group
+        android:checkableBehavior="single" >
+
+        <item android:id="@+id/noteListFragment"
+            android:title="@string/all_notes"
+            android:icon="@drawable/ic_note_pad" />
+
+        <item android:id="@+id/favoriteNoteListFragment"
+            android:title="@string/favorites"
+            android:icon="@drawable/ic_favorites" />
+
+        <item android:id="@+id/privateNoteListFragment"
+            android:title="@string/private_string"
+            android:icon="@drawable/ic_locked_folder" />
+
+        <item android:id="@+id/deletedNoteListFragment"
+            android:title="@string/trash"
+            android:icon="@drawable/ic_trash_can" />
+
+    </group>
+
+    <item android:title="@string/other" >
+        <menu >
+            <item android:id="@+id/settingsFragment2"
+                android:title="@string/settings"
+                android:icon="@drawable/ic_settings_gear" />
+        </menu>
+    </item>
+</menu>
