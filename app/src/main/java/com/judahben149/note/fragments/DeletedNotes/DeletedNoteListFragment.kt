@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments
+package com.judahben149.note.fragments.DeletedNotes
 
 import android.app.AlertDialog
 import android.os.Bundle

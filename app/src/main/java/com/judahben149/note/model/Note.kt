@@ -17,6 +17,8 @@ data class Note(
     var noteBody: String,
     @ColumnInfo(name = "favorite_status")
     var favoriteStatus: Boolean = false,
+    @ColumnInfo(name = "private_status")
+    var privateStatus: Boolean = false,
     @ColumnInfo(name = "time_created")
     var timeCreated: Long = 0,
     @ColumnInfo(name = "time_updated")

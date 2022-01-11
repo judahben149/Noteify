@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments
+package com.judahben149.note.fragments.Notes
 
 import android.os.Bundle
 import android.view.*

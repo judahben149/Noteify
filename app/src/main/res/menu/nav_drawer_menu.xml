@@ -13,9 +13,6 @@
             android:title="@string/favorites"
             android:icon="@drawable/ic_favorites" />
 
-        <item android:id="@+id/privateNoteListFragment"
-            android:title="@string/private_string"
-            android:icon="@drawable/ic_locked_folder" />
 
         <item android:id="@+id/deletedNoteListFragment"
             android:title="@string/trash"

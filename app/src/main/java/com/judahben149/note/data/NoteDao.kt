@@ -22,6 +22,10 @@ interface NoteDao {
     @Query("UPDATE note_table SET deleted_status = 1,time_deleted= :time_deleted WHERE deleted_status = 0 ")
     suspend fun sendAllNotesToTrash(time_deleted: Long)
 
+    @Query("SELECT * FROM note_table WHERE note_title LIKE :searchQuery OR note_body LIKE :searchQuery")
+    fun searchDatabase(searchQuery: String): LiveData<List<Note>>
+
+
 
     //methods for deleted notes
     @Query("SELECT * FROM note_table WHERE deleted_status = 1")

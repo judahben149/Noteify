@@ -1,11 +1,10 @@
-package com.judahben149.note.fragments
+package com.judahben149.note.fragments.Notes
 
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -58,22 +57,22 @@ class NoteListFragment : Fragment() {
         setUpViewModelAndObserver()
         recyclerViewDivider(rvList, layoutManager)
 
-//        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                binding.searchView.clearFocus()
-//                if (query != null) {
-//                    searchDatabase(query)
-//                }
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(query: String?): Boolean {
-//                if (query != null) {
-//                    searchDatabase(query)
-//                }
-//                return true
-//            }
-//        })
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.searchView.clearFocus()
+                if (query != null) {
+                    searchDatabase(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                if (query != null) {
+                    searchDatabase(query)
+                }
+                return true
+            }
+        })
 
         binding.fabAddNoteButton.setOnClickListener {
             Navigation.findNavController(binding.root)
@@ -110,16 +109,16 @@ class NoteListFragment : Fragment() {
 
 
     //function to search for a particular string either in the title or body of the note
-//    fun searchDatabase(query: String) {
-//        val searchQuery = "%$query%"
-//
-//        mViewModel.searchDatabase(searchQuery).observe(this, { list ->
-//            list.let {
-//                adapter.setData(it)
-//            }
-//
-//        })
-//    }
+    fun searchDatabase(query: String) {
+        val searchQuery = "%$query%"
+
+        mViewModel.searchDatabase(searchQuery).observe(this, { list ->
+            list.let {
+                adapter.setData(it)
+            }
+
+        })
+    }
 
 
     private fun deleteAllNotes() {

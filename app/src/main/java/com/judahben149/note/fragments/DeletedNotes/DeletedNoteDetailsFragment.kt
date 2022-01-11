@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments
+package com.judahben149.note.fragments.DeletedNotes
 
 import android.os.Bundle
 import android.view.*
@@ -77,11 +77,11 @@ class DeletedNoteDetailsFragment : Fragment() {
             args.deletedNote.id,
             args.deletedNote.noteTitle,
             args.deletedNote.noteBody,
-            false,
+            favoriteStatus = false,
+            privateStatus = false,
             args.deletedNote.timeCreated,
             args.deletedNote.timeUpdated,
-            false,
-            timeDeleted = 0
+            deletedStatus = false
         )
         mViewmodel.updateNote(noteToRestore)
         navigateToListFragment()
@@ -93,11 +93,11 @@ class DeletedNoteDetailsFragment : Fragment() {
             args.deletedNote.id,
             args.deletedNote.noteTitle,
             args.deletedNote.noteBody,
-            false,
+            favoriteStatus = false,
+            privateStatus = false,
             args.deletedNote.timeCreated,
             args.deletedNote.timeUpdated,
-            false,
-            timeDeleted = 0
+            deletedStatus = false
         )
         mViewmodel.deleteNote(noteToDelete)
         navigateToListFragment()

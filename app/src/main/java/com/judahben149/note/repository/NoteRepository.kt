@@ -27,6 +27,10 @@ class NoteRepository(private val noteDao: NoteDao) {
         noteDao.sendAllNotesToTrash(time_deleted)
     }
 
+    fun searchDatabase(searchQuery: String): LiveData<List<Note>> {
+        return noteDao.searchDatabase(searchQuery)
+    }
+
     //methods for deleted notes
     suspend fun deleteAllDeletedNotes() {
         noteDao.deleteAllDeletedNotes()
@@ -35,5 +39,4 @@ class NoteRepository(private val noteDao: NoteDao) {
     suspend fun restoreNotesFromTrash() {
         noteDao.restoreNotesFromTrash()
     }
-
 }

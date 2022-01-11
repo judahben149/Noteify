@@ -6,7 +6,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.note.databinding.NoteItemBinding
-import com.judahben149.note.fragments.DeletedNotesListFragmentDirections
+import com.judahben149.note.fragments.DeletedNotes.DeletedNotesListFragmentDirections
 import com.judahben149.note.model.Note
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*

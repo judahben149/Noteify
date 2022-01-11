@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments
+package com.judahben149.note.fragments.FavoriteNotes
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

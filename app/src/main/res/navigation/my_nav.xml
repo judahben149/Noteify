@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/noteListFragment"
-        android:name="com.judahben149.note.fragments.NoteListFragment"
+        android:name="com.judahben149.note.fragments.Notes.NoteListFragment"
         android:label="Notes"
         tools:layout="@layout/fragment_note_list" >
         <action
@@ -20,17 +20,12 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteNoteListFragment"
-        android:name="com.judahben149.note.fragments.FavoriteNoteListFragment"
+        android:name="com.judahben149.note.fragments.FavoriteNotes.FavoriteNoteListFragment"
         android:label="Favorites"
         tools:layout="@layout/fragment_favorite_note_list" />
     <fragment
-        android:id="@+id/privateNoteListFragment"
-        android:name="com.judahben149.note.fragments.PrivateNoteListFragment"
-        android:label="Private"
-        tools:layout="@layout/fragment_private_note_list" />
-    <fragment
         android:id="@+id/deletedNoteListFragment"
-        android:name="com.judahben149.note.fragments.DeletedNotesListFragment"
+        android:name="com.judahben149.note.fragments.DeletedNotes.DeletedNotesListFragment"
         android:label="Trash"
         tools:layout="@layout/fragment_deleted_note_list" >
         <action
@@ -39,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="com.judahben149.note.fragments.AddNoteFragment"
+        android:name="com.judahben149.note.fragments.Notes.AddNoteFragment"
         android:label="Create note"
         tools:layout="@layout/fragment_add_note">
         <action
@@ -48,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/noteDetailsFragment"
-        android:name="com.judahben149.note.fragments.NoteDetailsFragment"
+        android:name="com.judahben149.note.fragments.Notes.NoteDetailsFragment"
         android:label="Edit note"
         tools:layout="@layout/fragment_note_details">
         <action
@@ -64,8 +59,8 @@
         android:label="Settings" />
     <fragment
         android:id="@+id/deletedNoteDetailsFragment"
-        android:name="com.judahben149.note.fragments.DeletedNoteDetailsFragment"
-        android:label="DeletedNoteDetailsFragment"
+        android:name="com.judahben149.note.fragments.DeletedNotes.DeletedNoteDetailsFragment"
+        android:label="View note"
         tools:layout="@layout/fragment_note_details">
         <action
             android:id="@+id/action_deletedNoteDetailsFragment_to_deletedNoteListFragment"

@@ -5,14 +5,16 @@
       <map>
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_baseline_mic_24.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_blue_plus_11965.xml" value="0.22083333333333333" />
-        <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/search_box_drawable.xml" value="0.11354166666666667" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/search_box_drawable.xml" value="0.21" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/fragment_add_note.xml" value="0.2046875" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/fragment_add_private_note.xml" value="0.22" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/fragment_deleted_note_details.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/fragment_deleted_note_list.xml" value="0.190625" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/fragment_favorite_note_list.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/fragment_note_details.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/fragment_note_list.xml" value="0.2046875" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/fragment_private_note_details.xml" value="0.190625" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/fragment_private_note_list.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/nav_header.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/note_item.xml" value="0.2046875" />
