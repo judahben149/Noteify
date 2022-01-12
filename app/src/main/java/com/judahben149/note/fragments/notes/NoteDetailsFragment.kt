@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments
+package com.judahben149.note.fragments.notes
 
 import android.os.Bundle
 import android.view.*
@@ -86,7 +86,7 @@ class NoteDetailsFragment: Fragment() {
                 isNoteFavorite = true
             } else if (item.itemId == R.id.deleteNote){
                 isNoteDeleted = true
-                updateNoteInDatabase(isNoteFavorite, true)
+//                updateNoteInDatabase(isNoteFavorite, isNoteDeleted)
                 navigateToListFragment()
                 Snackbar.make(binding.root, "Note added to trash", Snackbar.LENGTH_SHORT).show()
             }
@@ -97,7 +97,7 @@ class NoteDetailsFragment: Fragment() {
         override fun onPause() {
             //this saves the note once the fragment loses focus or is going to be destroyed. Acts for Auto-save
             hideKeyboard()
-//        updateNoteInDatabase(isNoteFavorite, isNoteDeleted)
+            updateNoteInDatabase(isNoteFavorite, isNoteDeleted)
             super.onPause()
         }
 

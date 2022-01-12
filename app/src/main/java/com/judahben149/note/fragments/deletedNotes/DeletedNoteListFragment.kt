@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments
+package com.judahben149.note.fragments.deletedNotes
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -15,7 +15,7 @@ import com.judahben149.note.adapters.DeletedNoteListAdapter
 import com.judahben149.note.databinding.FragmentDeletedNoteListBinding
 import com.judahben149.note.viewmodel.DeletedNoteViewModel
 
-class DeletedNotesListFragment : Fragment() {
+class DeletedNoteListFragment : Fragment() {
 
     private var _binding: FragmentDeletedNoteListBinding? = null
     private val binding get() = _binding!!
@@ -125,10 +125,9 @@ class DeletedNotesListFragment : Fragment() {
 
             setTitle("Restore notes from trash")
             setMessage("Are you sure you want to restore notes? Notes will be returned to note list.")
-            setIcon(R.drawable.ic_delete)
+            setIcon(R.drawable.ic_restore)
             create()
             show()
         }
     }
-
 }

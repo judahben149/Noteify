@@ -1,32 +1,32 @@
-package com.judahben149.note.fragments
+package com.judahben149.note.fragments.notes
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.judahben149.note.LongPressed
 import com.judahben149.note.R
 import com.judahben149.note.adapters.NoteListAdapter
 import com.judahben149.note.databinding.FragmentNoteListBinding
-import com.judahben149.note.model.Note
 import com.judahben149.note.viewmodel.NoteViewModel
 
-class NoteListFragment : Fragment() {
+private const val TAG = "NoteListFragment"
 
+class NoteListFragment : Fragment(), LongPressed {
 
     private var _binding: FragmentNoteListBinding? = null
     private val binding get() = _binding!!
     private lateinit var mViewModel: NoteViewModel
-    val adapter = NoteListAdapter()
-
-    private val noteObject = emptyList<Note>()
+    private lateinit var adapter: NoteListAdapter
 
 
     override fun onCreateView(
@@ -35,6 +35,7 @@ class NoteListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentNoteListBinding.inflate(inflater, container, false)
+        Log.d(TAG, "onCreateView")
 
         setHasOptionsMenu(true)
         return binding.root
@@ -43,9 +44,11 @@ class NoteListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        Log.d(TAG, "onViewCreated")
+        adapter = NoteListAdapter(requireContext(), this)
+
         val rvList = binding.rvList
         rvList.adapter = adapter
-
 
         val layoutManager = LinearLayoutManager(
             requireContext(),
@@ -58,36 +61,44 @@ class NoteListFragment : Fragment() {
         setUpViewModelAndObserver()
         recyclerViewDivider(rvList, layoutManager)
 
-//        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                binding.searchView.clearFocus()
-//                if (query != null) {
-//                    searchDatabase(query)
-//                }
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(query: String?): Boolean {
-//                if (query != null) {
-//                    searchDatabase(query)
-//                }
-//                return true
-//            }
-//        })
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.searchView.clearFocus()
+                if (query != null) {
+                    searchDatabase(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                if (query != null) {
+                    searchDatabase(query)
+                }
+                return true
+            }
+        })
 
         binding.fabAddNoteButton.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_noteListFragment_to_addNoteFragment)
 //            Snackbar.make(binding.root, "Create note", Snackbar.LENGTH_SHORT).show()
         }
+
         super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
+        Log.d(TAG, "onDestroyView")
         _binding = null
         super.onDestroyView()
     }
 
+
+    override fun onResume() {
+        hideOrShowSearchView()
+        Log.d(TAG, "onResume")
+        super.onResume()
+    }
 
 
     private fun setUpViewModelAndObserver() {
@@ -95,7 +106,14 @@ class NoteListFragment : Fragment() {
         mViewModel = ViewModelProvider(this)[NoteViewModel::class.java]
         mViewModel.readAllNotes.observe(viewLifecycleOwner, { note ->
             adapter.setData(note)
+            hideOrShowSearchView()
         })
+    }
+
+    private fun hideOrShowSearchView() {
+        if (adapter.itemCount < 1) {
+            binding.searchView.visibility = View.GONE
+        } else binding.searchView.visibility = View.VISIBLE
     }
 
 
@@ -110,16 +128,16 @@ class NoteListFragment : Fragment() {
 
 
     //function to search for a particular string either in the title or body of the note
-//    fun searchDatabase(query: String) {
-//        val searchQuery = "%$query%"
-//
-//        mViewModel.searchDatabase(searchQuery).observe(this, { list ->
-//            list.let {
-//                adapter.setData(it)
-//            }
-//
-//        })
-//    }
+    fun searchDatabase(query: String) {
+        val searchQuery = "%$query%"
+
+        mViewModel.searchDatabase(searchQuery).observe(this, { list ->
+            list.let {
+                adapter.setData(it)
+            }
+
+        })
+    }
 
 
     private fun deleteAllNotes() {
@@ -130,6 +148,7 @@ class NoteListFragment : Fragment() {
             setPositiveButton("Yes") { _, _ ->
                 mViewModel.sendAllNotesToTrash(System.currentTimeMillis())
                 adapter.notifyDataSetChanged()
+                hideOrShowSearchView()
                 Snackbar.make(binding.root, "Successfully deleted all notes", Snackbar.LENGTH_LONG)
                     .show()
 
@@ -140,16 +159,12 @@ class NoteListFragment : Fragment() {
 
             setTitle("Delete all notes")
             setMessage("Are you sure you want to delete all notes? Notes will be moved to trash")
-            setIcon(R.drawable.ic_delete)
+            setIcon(R.drawable.ic_trash_can)
             create()
             show()
         }
     }
 
-    private fun undoDelete(position: Note) {
-        mViewModel.addNote(position)
-        adapter.notifyDataSetChanged()
-    }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -168,6 +183,40 @@ class NoteListFragment : Fragment() {
 
         }
         return super.onOptionsItemSelected(item)
+    }
+
+//pop up menu for long press of notes
+    override fun popUpMenu(view: View, position: Int) {
+        val popupMenu = PopupMenu(requireContext(), view)
+
+        popupMenu.inflate(R.menu.pop_up_menu)
+
+        popupMenu.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.addToFavorites_popUpMenu -> {
+                    mViewModel.addSingleNoteToFavorites(adapter.returnItemId(position))
+                    Snackbar.make(binding.root, "Added to favorites", Snackbar.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.sendToTrash_popUpMenu -> {
+                    mViewModel.sendSingleNoteToTrash(System.currentTimeMillis(), adapter.returnItemId(position))
+                    adapter.notifyItemRemoved(position)
+                    Snackbar.make(binding.root, "Note deleted", Snackbar.LENGTH_SHORT).show()
+                    true
+                }
+                else -> true
+            }
+        }
+        popupMenu.show()
+
+        val popUp = PopupMenu::class.java.getDeclaredField("mPopup").apply {
+            this.isAccessible = true
+        }
+        val menu = popUp.get(popupMenu)
+        menu.javaClass.apply {
+            getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                .invoke(menu, true)
+        }
     }
 
 }

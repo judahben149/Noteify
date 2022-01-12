@@ -4,9 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.judahben149.note.databinding.NoteItemBinding
-import com.judahben149.note.fragments.DeletedNotesListFragmentDirections
+import com.judahben149.note.fragments.deletedNotes.DeletedNoteListFragmentDirections
 import com.judahben149.note.model.Note
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
@@ -26,7 +25,7 @@ class DeletedNoteListAdapter() : RecyclerView.Adapter<DeletedNoteListAdapter.Del
             binding.tvNoteDate.text = "Deleted: " + timeDeleted
 
             binding.noteItem.setOnClickListener {
-                val action = DeletedNotesListFragmentDirections.actionDeletedNoteListFragmentToDeletedNoteDetailsFragment(currentNote)
+                val action = DeletedNoteListFragmentDirections.actionDeletedNoteListFragmentToDeletedNoteDetailsFragment(currentNote)
                 Navigation.findNavController(binding.root).navigate(action)
             }
         }

@@ -7,15 +7,12 @@
 
         <item android:id="@+id/noteListFragment"
             android:title="@string/all_notes"
-            android:icon="@drawable/ic_note_pad" />
+            android:icon="@drawable/ic_note_icon" />
 
         <item android:id="@+id/favoriteNoteListFragment"
             android:title="@string/favorites"
-            android:icon="@drawable/ic_favorites" />
+            android:icon="@drawable/ic_star_black" />
 
-        <item android:id="@+id/privateNoteListFragment"
-            android:title="@string/private_string"
-            android:icon="@drawable/ic_locked_folder" />
 
         <item android:id="@+id/deletedNoteListFragment"
             android:title="@string/trash"

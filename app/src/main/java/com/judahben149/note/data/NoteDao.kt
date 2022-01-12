@@ -7,6 +7,7 @@ import com.judahben149.note.model.Note
 @Dao
 interface NoteDao {
 
+    //methods for regular notes
     @Query("SELECT * FROM note_table WHERE deleted_status=0 ORDER BY id ASC")
     fun readAllNotes(): LiveData<List<Note>>
 
@@ -19,8 +20,22 @@ interface NoteDao {
     @Delete
     suspend fun deleteNote(note: Note)
 
+    @Query("UPDATE note_table SET deleted_status = 1,time_deleted= :time_deleted WHERE id = :id")
+    suspend fun sendSingleNoteToTrash(time_deleted: Long, id: Int)
+
     @Query("UPDATE note_table SET deleted_status = 1,time_deleted= :time_deleted WHERE deleted_status = 0 ")
     suspend fun sendAllNotesToTrash(time_deleted: Long)
+
+    @Query("SELECT * FROM note_table WHERE deleted_status = 0 AND (note_title LIKE :searchQuery OR note_body LIKE :searchQuery)")
+    fun searchDatabase(searchQuery: String): LiveData<List<Note>>
+
+
+    //methods for favorite notes
+    @Query("SELECT * FROM note_table WHERE favorite_status = 1 AND deleted_status = 0")
+    fun readAllFavoriteNotes(): LiveData<List<Note>>
+
+    @Query("UPDATE note_table SET favorite_status = 1 WHERE id = :id AND deleted_status = 0")
+    suspend fun addSingleNoteToFavorites(id: Int)
 
 
     //methods for deleted notes

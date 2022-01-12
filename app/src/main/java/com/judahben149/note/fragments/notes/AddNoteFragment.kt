@@ -1,14 +1,12 @@
-package com.judahben149.note.fragments
+package com.judahben149.note.fragments.notes
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.google.android.material.snackbar.Snackbar
 import com.judahben149.note.R
 import com.judahben149.note.databinding.FragmentAddNoteBinding
 import com.judahben149.note.model.Note
@@ -52,7 +50,17 @@ class AddNoteFragment : Fragment() {
         val noteBody = binding.etNoteBodyAddNoteScreen.text.toString()
         val timeCreated = System.currentTimeMillis()
 
-        val note = Note(0, noteTitle, noteBody, false, timeCreated, timeCreated, false, 0)
+        val note = Note(
+            0,
+            noteTitle,
+            noteBody,
+            favoriteStatus = false,
+            privateStatus = false,
+            timeCreated = timeCreated,
+            timeUpdated = timeCreated,
+            deletedStatus = false,
+            timeDeleted = 0
+        )
         mViewmodel.addNote(note)
 
         Navigation.findNavController(binding.root).navigate(R.id.action_addNoteFragment_to_noteListFragment)

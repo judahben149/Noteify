@@ -18,7 +18,7 @@
         <item name="noteTitleColor">#00E1CE</item>
         <item name="searchViewOutline">@color/light_blue</item>
         <item name="toolBarColor">#323232</item>
-
+        <item name="iconOutlineColor">@color/light_blue</item>
     </style>
 
     <style name="NoteTitle" parent="TextAppearance.AppCompat.Body1">
