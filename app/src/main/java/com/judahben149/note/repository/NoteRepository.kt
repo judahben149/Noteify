@@ -24,12 +24,21 @@ class NoteRepository(private val noteDao: NoteDao) {
         noteDao.deleteNote(note)
     }
 
+    suspend fun sendSingleNoteToTrash(time_deleted: Long, id: Int) {
+        noteDao.sendSingleNoteToTrash(time_deleted, id)
+    }
+
     suspend fun sendAllNotesToTrash(time_deleted: Long) {
         noteDao.sendAllNotesToTrash(time_deleted)
     }
 
     fun searchDatabase(searchQuery: String): LiveData<List<Note>> {
         return noteDao.searchDatabase(searchQuery)
+    }
+
+
+    suspend fun addSingleNoteToFavorites(id: Int) {
+        noteDao.addSingleNoteToFavorites(id)
     }
 
     //methods for deleted notes

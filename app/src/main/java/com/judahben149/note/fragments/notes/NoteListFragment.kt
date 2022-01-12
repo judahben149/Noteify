@@ -1,15 +1,12 @@
 package com.judahben149.note.fragments.notes
 
 import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
-import android.os.Vibrator
 import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -20,7 +17,6 @@ import com.judahben149.note.LongPressed
 import com.judahben149.note.R
 import com.judahben149.note.adapters.NoteListAdapter
 import com.judahben149.note.databinding.FragmentNoteListBinding
-import com.judahben149.note.model.Note
 import com.judahben149.note.viewmodel.NoteViewModel
 
 private const val TAG = "NoteListFragment"
@@ -163,7 +159,7 @@ class NoteListFragment : Fragment(), LongPressed {
 
             setTitle("Delete all notes")
             setMessage("Are you sure you want to delete all notes? Notes will be moved to trash")
-            setIcon(R.drawable.ic_delete)
+            setIcon(R.drawable.ic_trash_can)
             create()
             show()
         }
@@ -189,7 +185,8 @@ class NoteListFragment : Fragment(), LongPressed {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun popUpMenu(view: View) {
+//pop up menu for long press of notes
+    override fun popUpMenu(view: View, position: Int) {
         val popupMenu = PopupMenu(requireContext(), view)
 
         popupMenu.inflate(R.menu.pop_up_menu)
@@ -197,11 +194,14 @@ class NoteListFragment : Fragment(), LongPressed {
         popupMenu.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.addToFavorites_popUpMenu -> {
+                    mViewModel.addSingleNoteToFavorites(adapter.returnItemId(position))
                     Snackbar.make(binding.root, "Added to favorites", Snackbar.LENGTH_SHORT).show()
                     true
                 }
                 R.id.sendToTrash_popUpMenu -> {
-                    Snackbar.make(binding.root, "Added to favorites", Snackbar.LENGTH_SHORT).show()
+                    mViewModel.sendSingleNoteToTrash(System.currentTimeMillis(), adapter.returnItemId(position))
+                    adapter.notifyItemRemoved(position)
+                    Snackbar.make(binding.root, "Note deleted", Snackbar.LENGTH_SHORT).show()
                     true
                 }
                 else -> true

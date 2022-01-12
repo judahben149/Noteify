@@ -15,6 +15,7 @@
         <!-- Customize your theme here. -->
         <item name="searchViewOutline">@color/light_blue</item>
         <item name="toolBarColor">@color/white</item>
+        <item name="iconOutlineColor">@color/light_blue</item>
     </style>
 
 

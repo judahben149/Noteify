@@ -125,10 +125,9 @@ class DeletedNoteListFragment : Fragment() {
 
             setTitle("Restore notes from trash")
             setMessage("Are you sure you want to restore notes? Notes will be returned to note list.")
-            setIcon(R.drawable.ic_delete)
+            setIcon(R.drawable.ic_restore)
             create()
             show()
         }
     }
-
 }

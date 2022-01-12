@@ -38,6 +38,11 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
             repository.deleteNote(note)
         }
     }
+    fun sendSingleNoteToTrash(time_deleted: Long, id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.sendSingleNoteToTrash(time_deleted, id)
+        }
+    }
 
     fun sendAllNotesToTrash(time_deleted: Long) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -52,6 +57,12 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     fun restoreNotesFromTrash() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.restoreNotesFromTrash()
+        }
+    }
+
+    fun addSingleNoteToFavorites(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addSingleNoteToFavorites(id)
         }
     }
 }

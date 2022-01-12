@@ -2,6 +2,7 @@ package com.judahben149.note.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,9 @@ class NoteListAdapter(val context: Context, private val longPressed: LongPressed
                 binding.tvNoteTitle.text = currentNote.noteTitle
                 binding.tvNoteDescription.text = currentNote.noteBody
                 binding.tvNoteDate.text = prettyTime
+                if (currentNote.favoriteStatus == true) {
+                    binding.favoriteIcon.visibility = View.VISIBLE
+                } else binding.favoriteIcon.visibility = View.INVISIBLE
 
                 binding.noteItem.setOnClickListener {
                     val action = NoteListFragmentDirections.actionNoteListFragmentToNoteDetailsFragment(currentNote)
@@ -45,7 +49,7 @@ class NoteListAdapter(val context: Context, private val longPressed: LongPressed
             holder.bindItem(position)
 
             holder.itemView.setOnLongClickListener {
-                longPressed.popUpMenu(it)
+                longPressed.popUpMenu(it, position)
                 return@setOnLongClickListener true
             }
         }
@@ -57,4 +61,13 @@ class NoteListAdapter(val context: Context, private val longPressed: LongPressed
             this.noteList = note
             notifyDataSetChanged()
         }
+
+    fun getItemPosition(position: Int): Note {
+        return noteList[position]
+    }
+
+    fun returnItemId(position: Int): Int {
+        val selectedNote = noteList[position]
+        return selectedNote.id
+    }
 }

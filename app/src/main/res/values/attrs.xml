@@ -8,4 +8,5 @@
     <attr name="searchView" format="color" />
     <attr name="searchViewOutline" format="color"/>
     <attr name="toolBarColor" format="color"/>
+    <attr name="iconOutlineColor" format="color"/>
 </resources>
