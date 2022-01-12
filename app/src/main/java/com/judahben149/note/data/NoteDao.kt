@@ -25,6 +25,9 @@ interface NoteDao {
     @Query("SELECT * FROM note_table WHERE deleted_status = 0 AND (note_title LIKE :searchQuery OR note_body LIKE :searchQuery)")
     fun searchDatabase(searchQuery: String): LiveData<List<Note>>
 
+    //methods for favorite notes
+    @Query("SELECT * FROM note_table WHERE favorite_status = 1 AND deleted_status = 0")
+    fun readAllFavoriteNotes(): LiveData<List<Note>>
 
     //methods for deleted notes
     @Query("SELECT * FROM note_table WHERE deleted_status = 1")

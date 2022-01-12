@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments.DeletedNotes
+package com.judahben149.note.fragments.deletedNotes
 
 import android.os.Bundle
 import android.view.*

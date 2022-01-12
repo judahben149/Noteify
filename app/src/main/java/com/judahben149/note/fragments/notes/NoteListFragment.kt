@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments.Notes
+package com.judahben149.note.fragments.notes
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -19,14 +19,10 @@ import com.judahben149.note.viewmodel.NoteViewModel
 
 class NoteListFragment : Fragment() {
 
-
     private var _binding: FragmentNoteListBinding? = null
     private val binding get() = _binding!!
     private lateinit var mViewModel: NoteViewModel
     val adapter = NoteListAdapter()
-
-    private val noteObject = emptyList<Note>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -145,10 +141,6 @@ class NoteListFragment : Fragment() {
         }
     }
 
-    private fun undoDelete(position: Note) {
-        mViewModel.addNote(position)
-        adapter.notifyDataSetChanged()
-    }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -7,6 +7,7 @@ import com.judahben149.note.model.Note
 class NoteRepository(private val noteDao: NoteDao) {
 
     val readAllNotes: LiveData<List<Note>> = noteDao.readAllNotes()
+    val readAllFavoriteNotes: LiveData<List<Note>> = noteDao.readAllFavoriteNotes()
     val readAllDeletedNotes: LiveData<List<Note>> = noteDao.readAllDeletedNotes()
 
 

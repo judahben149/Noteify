@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments.DeletedNotes
+package com.judahben149.note.fragments.deletedNotes
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -15,7 +15,7 @@ import com.judahben149.note.adapters.DeletedNoteListAdapter
 import com.judahben149.note.databinding.FragmentDeletedNoteListBinding
 import com.judahben149.note.viewmodel.DeletedNoteViewModel
 
-class DeletedNotesListFragment : Fragment() {
+class DeletedNoteListFragment : Fragment() {
 
     private var _binding: FragmentDeletedNoteListBinding? = null
     private val binding get() = _binding!!

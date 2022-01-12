@@ -49,5 +49,9 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         return  repository.searchDatabase(searchQuery)
     }
 
-
+    fun restoreNotesFromTrash() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.restoreNotesFromTrash()
+        }
+    }
 }
