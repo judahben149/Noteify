@@ -1,16 +1,18 @@
 package com.judahben149.note.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.judahben149.note.LongPressed
 import com.judahben149.note.databinding.NoteItemBinding
 import com.judahben149.note.fragments.notes.NoteListFragmentDirections
 import com.judahben149.note.model.Note
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
 
-class NoteListAdapter(): RecyclerView.Adapter<NoteListAdapter.NoteListRecyclerViewViewHolder>() {
+class NoteListAdapter(val context: Context, private val longPressed: LongPressed): RecyclerView.Adapter<NoteListAdapter.NoteListRecyclerViewViewHolder>() {
 
         var noteList = emptyList<Note>()
 
@@ -41,6 +43,11 @@ class NoteListAdapter(): RecyclerView.Adapter<NoteListAdapter.NoteListRecyclerVi
 
         override fun onBindViewHolder(holder: NoteListRecyclerViewViewHolder, position: Int) {
             holder.bindItem(position)
+
+            holder.itemView.setOnLongClickListener {
+                longPressed.popUpMenu(it)
+                return@setOnLongClickListener true
+            }
         }
 
         override fun getItemCount() = noteList.size

@@ -1,17 +1,22 @@
 package com.judahben149.note.fragments.notes
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.Log
 import android.view.*
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.judahben149.note.LongPressed
 import com.judahben149.note.R
 import com.judahben149.note.adapters.NoteListAdapter
 import com.judahben149.note.databinding.FragmentNoteListBinding
@@ -20,12 +25,13 @@ import com.judahben149.note.viewmodel.NoteViewModel
 
 private const val TAG = "NoteListFragment"
 
-class NoteListFragment : Fragment() {
+class NoteListFragment : Fragment(), LongPressed {
 
     private var _binding: FragmentNoteListBinding? = null
     private val binding get() = _binding!!
     private lateinit var mViewModel: NoteViewModel
-    val adapter = NoteListAdapter()
+    private lateinit var adapter: NoteListAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +49,7 @@ class NoteListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         Log.d(TAG, "onViewCreated")
+        adapter = NoteListAdapter(requireContext(), this)
 
         val rvList = binding.rvList
         rvList.adapter = adapter
@@ -180,6 +187,36 @@ class NoteListFragment : Fragment() {
 
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun popUpMenu(view: View) {
+        val popupMenu = PopupMenu(requireContext(), view)
+
+        popupMenu.inflate(R.menu.pop_up_menu)
+
+        popupMenu.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.addToFavorites_popUpMenu -> {
+                    Snackbar.make(binding.root, "Added to favorites", Snackbar.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.sendToTrash_popUpMenu -> {
+                    Snackbar.make(binding.root, "Added to favorites", Snackbar.LENGTH_SHORT).show()
+                    true
+                }
+                else -> true
+            }
+        }
+        popupMenu.show()
+
+        val popUp = PopupMenu::class.java.getDeclaredField("mPopup").apply {
+            this.isAccessible = true
+        }
+        val menu = popUp.get(popupMenu)
+        menu.javaClass.apply {
+            getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                .invoke(menu, true)
+        }
     }
 
 }
