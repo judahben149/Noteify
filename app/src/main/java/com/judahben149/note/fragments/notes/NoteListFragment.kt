@@ -2,6 +2,7 @@ package com.judahben149.note.fragments.notes
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
@@ -17,6 +18,8 @@ import com.judahben149.note.databinding.FragmentNoteListBinding
 import com.judahben149.note.model.Note
 import com.judahben149.note.viewmodel.NoteViewModel
 
+private const val TAG = "NoteListFragment"
+
 class NoteListFragment : Fragment() {
 
     private var _binding: FragmentNoteListBinding? = null
@@ -30,6 +33,7 @@ class NoteListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentNoteListBinding.inflate(inflater, container, false)
+        Log.d(TAG, "onCreateView")
 
         setHasOptionsMenu(true)
         return binding.root
@@ -38,9 +42,10 @@ class NoteListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        Log.d(TAG, "onViewCreated")
+
         val rvList = binding.rvList
         rvList.adapter = adapter
-
 
         val layoutManager = LinearLayoutManager(
             requireContext(),
@@ -75,14 +80,22 @@ class NoteListFragment : Fragment() {
                 .navigate(R.id.action_noteListFragment_to_addNoteFragment)
 //            Snackbar.make(binding.root, "Create note", Snackbar.LENGTH_SHORT).show()
         }
+
         super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
+        Log.d(TAG, "onDestroyView")
         _binding = null
         super.onDestroyView()
     }
 
+
+    override fun onResume() {
+        hideOrShowSearchView()
+        Log.d(TAG, "onResume")
+        super.onResume()
+    }
 
 
     private fun setUpViewModelAndObserver() {
@@ -90,7 +103,14 @@ class NoteListFragment : Fragment() {
         mViewModel = ViewModelProvider(this)[NoteViewModel::class.java]
         mViewModel.readAllNotes.observe(viewLifecycleOwner, { note ->
             adapter.setData(note)
+            hideOrShowSearchView()
         })
+    }
+
+    private fun hideOrShowSearchView() {
+        if (adapter.itemCount < 1) {
+            binding.searchView.visibility = View.GONE
+        } else binding.searchView.visibility = View.VISIBLE
     }
 
 
@@ -125,6 +145,7 @@ class NoteListFragment : Fragment() {
             setPositiveButton("Yes") { _, _ ->
                 mViewModel.sendAllNotesToTrash(System.currentTimeMillis())
                 adapter.notifyDataSetChanged()
+                hideOrShowSearchView()
                 Snackbar.make(binding.root, "Successfully deleted all notes", Snackbar.LENGTH_LONG)
                     .show()
 
