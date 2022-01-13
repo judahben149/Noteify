@@ -36,9 +36,17 @@ class NoteRepository(private val noteDao: NoteDao) {
         return noteDao.searchDatabase(searchQuery)
     }
 
-
+    //methods for favorite notes
     suspend fun addSingleNoteToFavorites(id: Int) {
         noteDao.addSingleNoteToFavorites(id)
+    }
+
+    suspend fun removeAllNotesFromFavorites() {
+        noteDao.removeAllNotesFromFavorites()
+    }
+
+    suspend fun sendAllFavoriteNotesToTrash(time_deleted: Long) {
+        noteDao.sendAllFavoriteNotesToTrash(time_deleted)
     }
 
     //methods for deleted notes

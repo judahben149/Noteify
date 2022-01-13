@@ -59,16 +59,16 @@ class NoteDetailsFragment: Fragment() {
 
             isNoteFavorite = args.noteDetails.favoriteStatus
 
-            binding.btnCancelNoteDetailsScreen.setOnClickListener {
-                hideKeyboard()
-                navigateToListFragment()
-            }
-
-            binding.btnSaveNoteNoteDetailsScreen.setOnClickListener {
-                updateNoteInDatabase(isNoteFavorite, false)
-                hideKeyboard()
-                navigateToListFragment()
-            }
+//            binding.btnCancelNoteDetailsScreen.setOnClickListener {
+//                hideKeyboard()
+//                navigateToListFragment()
+//            }
+//
+//            binding.btnSaveNoteNoteDetailsScreen.setOnClickListener {
+//                updateNoteInDatabase(isNoteFavorite, false)
+//                hideKeyboard()
+//                navigateToListFragment()
+//            }
 
             super.onViewCreated(view, savedInstanceState)
         }

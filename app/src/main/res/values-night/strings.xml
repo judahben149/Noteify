@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Noteify</string>
     <string name="private_string">Private</string>
     <string name="favorites">Favorites</string>
     <string name="all_notes">Notes</string>
@@ -14,7 +15,6 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
 
-    <string name="app_name">Noteify</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="undo">UNDO</string>
@@ -47,4 +47,7 @@
 
     <string name="libraries">Libraries</string>
     <string name="librariesKey" translatable="false">libraries</string>
+
+    <string name="shortCutLabel">Create Note</string>
+    <string name="shortCutLongLabel">Create a new Note</string>
 </resources>

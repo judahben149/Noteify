@@ -74,30 +74,30 @@
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/btn_saveNote_NoteDetailsScreen"
-        android:textSize="14dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/MyButtonStyle_Primary"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="20dp"
-        android:text="Update"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/btn_saveNote_NoteDetailsScreen"-->
+<!--        android:textSize="14dp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        style="@style/MyButtonStyle_Primary"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_marginEnd="45dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:text="Update"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
-    <Button
-        android:id="@+id/btn_cancel_NoteDetailsScreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/MyButtonStyle_Secondary"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"
-        android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/btn_cancel_NoteDetailsScreen"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        style="@style/MyButtonStyle_Secondary"-->
+<!--        android:layout_marginStart="45dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:text="Cancel"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,13 +6,17 @@
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_baseline_mic_24.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_blue_plus_11965.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_cloudy.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_favorite_placeholder.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_favorites.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_github_icon.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_info_icon.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_note_icon.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_note_placeholder.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_settings_gear.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_star.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_star_small.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_trash_can.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/ic_trash_placeholder.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/drawable/search_box_drawable.xml" value="0.21" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/activity_main.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/fragment_add_note.xml" value="0.2046875" />
@@ -28,9 +32,13 @@
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/nav_header.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/layout/note_item.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/menu/deleted_notes_menu.xml" value="0.2046875" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/menu/favorite_notes_menu.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/menu/nav_drawer_menu.xml" value="0.2046875" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/menu/note_details_menu.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/menu/note_list_menu.xml" value="0.2046875" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/menu/pop_up_menu.xml" value="0.2046875" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/xml/root_preferences.xml" value="0.2046875" />
       </map>
     </option>
