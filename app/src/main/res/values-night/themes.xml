@@ -31,4 +31,10 @@
         <item name="elevation">10dp</item>
         <item name="borderWidth">0dp</item>
     </style>
+
+
+    <style name="splashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_image</item>
+        <item name="android:statusBarColor">@color/ic_launcher_background</item>
+    </style>
 </resources>
