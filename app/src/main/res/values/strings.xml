@@ -45,4 +45,9 @@
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
+    <string name="about">About</string>
+    <string name="github">GitHub</string>
+
+    <string name="libraries">Libraries</string>
+    <string name="librariesKey" translatable="false">libraries</string>
 </resources>

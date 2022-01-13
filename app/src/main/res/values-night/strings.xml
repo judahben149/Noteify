@@ -42,4 +42,9 @@
     <string name="follow_system" translatable="false">follow_system</string>
     <string name="enter_note_body">Enter note body</string>
     <string name="enter_note_title">Enter note title</string>
+    <string name="about">About</string>
+    <string name="github">GitHub</string>
+
+    <string name="libraries">Libraries</string>
+    <string name="librariesKey" translatable="false">libraries</string>
 </resources>
