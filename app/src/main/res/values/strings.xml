@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Note</string>
+    <string name="app_name">Noteify</string>
     <string name="private_string">Private</string>
     <string name="favorites">Favorites</string>
     <string name="all_notes">Notes</string>
@@ -45,4 +45,12 @@
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
+    <string name="about">About</string>
+    <string name="github">GitHub</string>
+
+    <string name="libraries">Libraries</string>
+    <string name="librariesKey" translatable="false">libraries</string>
+
+    <string name="shortCutLabel">Create Note</string>
+    <string name="shortCutLongLabel">Create a new Note</string>
 </resources>

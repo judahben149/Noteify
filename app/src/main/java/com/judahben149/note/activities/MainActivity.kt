@@ -33,6 +33,10 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setUpNavigation()
+    }
+
+    private fun setUpNavigation() {
         //initialize variables here
         navView = binding.navigationView
         drawerLayout = binding.drawerLayout
@@ -45,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         navView.setupWithNavController(navController)
+
     }
 
     override fun onDestroy() {

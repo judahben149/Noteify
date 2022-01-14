@@ -37,6 +37,12 @@ interface NoteDao {
     @Query("UPDATE note_table SET favorite_status = 1 WHERE id = :id AND deleted_status = 0")
     suspend fun addSingleNoteToFavorites(id: Int)
 
+    @Query("UPDATE note_table SET favorite_status = 0 WHERE favorite_status = 1")
+    suspend fun removeAllNotesFromFavorites()
+
+    @Query("UPDATE note_table SET deleted_status = 1,time_deleted= :time_deleted WHERE favorite_status = 1 ")
+    suspend fun sendAllFavoriteNotesToTrash(time_deleted: Long)
+
 
     //methods for deleted notes
     @Query("SELECT * FROM note_table WHERE deleted_status = 1")

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.judahben149.note.R
 import com.judahben149.note.adapters.FavoriteNoteListAdapter
 import com.judahben149.note.databinding.FragmentFavoriteNoteListBinding
@@ -55,6 +56,7 @@ class FavoriteNoteListFragment  : Fragment() {
     private fun setUpObservers() {
         mViewModel.readAllFavoriteNotes.observe(viewLifecycleOwner, { note ->
             adapter.setData(note)
+            hideOrShowPlaceholder()
         })
     }
 
@@ -76,6 +78,28 @@ class FavoriteNoteListFragment  : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.favorite_notes_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_remove_all_from_favorites -> {
+                mViewModel.removeAllNotesFromFavorites()
+                Snackbar.make(binding.root, "Notes removed from favorites", Snackbar.LENGTH_SHORT).show()
+            }
+            R.id.menu_delete_all_favorites -> {
+                mViewModel.sendAllFavoriteNotesToTrash(System.currentTimeMillis())
+                Snackbar.make(binding.root, "Notes sent to trash", Snackbar.LENGTH_SHORT).show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun hideOrShowPlaceholder() {
+        if (adapter.itemCount < 1) {
+            binding.favoritePlaceholder.visibility = View.VISIBLE
+        } else {
+            binding.favoritePlaceholder.visibility = View.INVISIBLE
+        }
     }
 
 }

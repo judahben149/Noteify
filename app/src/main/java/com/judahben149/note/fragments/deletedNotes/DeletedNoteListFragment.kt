@@ -87,6 +87,7 @@ class DeletedNoteListFragment : Fragment() {
     private fun setUpObservers() {
         mViewModel.readAllDeletedNotes.observe(viewLifecycleOwner, Observer { note ->
             adapter.setData(note)
+            hideOrShowPlaceholder()
         })
     }
 
@@ -128,6 +129,14 @@ class DeletedNoteListFragment : Fragment() {
             setIcon(R.drawable.ic_restore)
             create()
             show()
+        }
+    }
+
+    private fun hideOrShowPlaceholder() {
+        if (adapter.itemCount < 1) {
+            binding.trashPlaceholder.visibility = View.VISIBLE
+        } else {
+            binding.trashPlaceholder.visibility = View.INVISIBLE
         }
     }
 }

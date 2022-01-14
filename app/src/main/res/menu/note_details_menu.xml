@@ -5,7 +5,7 @@
     <item
         android:id="@+id/addToFavorites"
         android:title="Add to favorites"
-        android:icon="@drawable/ic_favorites"
+        android:icon="@drawable/ic_star_small"
         app:showAsAction="never" />
 
     <item

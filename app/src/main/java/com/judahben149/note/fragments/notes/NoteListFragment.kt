@@ -95,7 +95,7 @@ class NoteListFragment : Fragment(), LongPressed {
 
 
     override fun onResume() {
-        hideOrShowSearchView()
+        hideOrShowSearchViewAndPlaceholder()
         Log.d(TAG, "onResume")
         super.onResume()
     }
@@ -106,14 +106,18 @@ class NoteListFragment : Fragment(), LongPressed {
         mViewModel = ViewModelProvider(this)[NoteViewModel::class.java]
         mViewModel.readAllNotes.observe(viewLifecycleOwner, { note ->
             adapter.setData(note)
-            hideOrShowSearchView()
+            hideOrShowSearchViewAndPlaceholder()
         })
     }
 
-    private fun hideOrShowSearchView() {
+    private fun hideOrShowSearchViewAndPlaceholder() {
         if (adapter.itemCount < 1) {
             binding.searchView.visibility = View.GONE
-        } else binding.searchView.visibility = View.VISIBLE
+            binding.notePlaceholder.visibility = View.VISIBLE
+        } else {
+            binding.searchView.visibility = View.VISIBLE
+            binding.notePlaceholder.visibility = View.INVISIBLE
+        }
     }
 
 
@@ -148,7 +152,7 @@ class NoteListFragment : Fragment(), LongPressed {
             setPositiveButton("Yes") { _, _ ->
                 mViewModel.sendAllNotesToTrash(System.currentTimeMillis())
                 adapter.notifyDataSetChanged()
-                hideOrShowSearchView()
+                hideOrShowSearchViewAndPlaceholder()
                 Snackbar.make(binding.root, "Successfully deleted all notes", Snackbar.LENGTH_LONG)
                     .show()
 
