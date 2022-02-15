@@ -104,9 +104,9 @@ class NoteListFragment : Fragment(), LongPressed {
     private fun setUpFloatingActionButton() {
         binding.rvList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0){ // Scrolling down
+                if (dy > 0) { // Scrolling down
                     binding.fabAddNoteButton.shrink()
-                }else{ // Scrolling up
+                } else { // Scrolling up
                     binding.fabAddNoteButton.extend()
                 }
             }
@@ -141,7 +141,6 @@ class NoteListFragment : Fragment(), LongPressed {
                 rvList.addItemDecoration(this)
             }
     }
-
 
 
     //function to search for a particular string either in the title or body of the note
@@ -183,7 +182,6 @@ class NoteListFragment : Fragment(), LongPressed {
     }
 
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.note_list_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -202,21 +200,24 @@ class NoteListFragment : Fragment(), LongPressed {
         return super.onOptionsItemSelected(item)
     }
 
-//pop up menu for long press of notes
+    //pop up menu for long press of notes
     override fun popUpMenu(view: View, position: Int) {
         val popupMenu = PopupMenu(requireContext(), view)
 
         popupMenu.inflate(R.menu.pop_up_menu)
 
         popupMenu.setOnMenuItemClickListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.addToFavorites_popUpMenu -> {
                     mViewModel.addSingleNoteToFavorites(adapter.returnItemId(position))
                     Snackbar.make(binding.root, "Added to favorites", Snackbar.LENGTH_SHORT).show()
                     true
                 }
                 R.id.sendToTrash_popUpMenu -> {
-                    mViewModel.sendSingleNoteToTrash(System.currentTimeMillis(), adapter.returnItemId(position))
+                    mViewModel.sendSingleNoteToTrash(
+                        System.currentTimeMillis(),
+                        adapter.returnItemId(position)
+                    )
                     adapter.notifyItemRemoved(position)
                     Snackbar.make(binding.root, "Note deleted", Snackbar.LENGTH_SHORT).show()
                     true
