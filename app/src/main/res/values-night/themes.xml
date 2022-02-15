@@ -27,7 +27,7 @@
 
 
     <style name="myFAB" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="backgroundTint">@color/light_blue</item>
+        <item name="backgroundTint">@color/dark_blue_tint</item>
         <item name="elevation">10dp</item>
         <item name="borderWidth">0dp</item>
     </style>

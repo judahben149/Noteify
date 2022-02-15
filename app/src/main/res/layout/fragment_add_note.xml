@@ -33,6 +33,7 @@
 
 
     <ScrollView
+        android:id="@+id/scrollView_noteBody"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,29 +60,49 @@
     </ScrollView>
 
 
-    <Button
-        android:id="@+id/btn_saveNote_addNoteScreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/MyButtonStyle_Primary"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="20dp"
-        android:elevation="7dp"
-        android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/fab_saveNote_addNoteScreen"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        style="@style/MyButtonStyle_Primary"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_marginEnd="45dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:elevation="7dp"-->
+<!--        android:text="@string/save"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
-    <Button
-        android:id="@+id/btn_cancel_addNoteScreen"
+<!--    <Button-->
+<!--        android:id="@+id/btn_cancel_addNoteScreen"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        style="@style/MyButtonStyle_Secondary"-->
+<!--        android:layout_marginStart="45dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:text="@string/cancel"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_saveNote_addNoteScreen"
+        style="@style/myFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/MyButtonStyle_Secondary"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/cancel"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:contentDescription="@string/save_note"
+        android:text="@string/save"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:icon="@drawable/ic_check_mark"
+        app:iconPadding="10dp"
+        app:iconSize="28dp"
+        app:layout_anchor="@id/scrollView_noteBody"
+        app:layout_anchorGravity="bottom|end"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
