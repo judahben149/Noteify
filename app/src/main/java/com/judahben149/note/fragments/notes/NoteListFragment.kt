@@ -17,6 +17,7 @@ import com.judahben149.note.LongPressed
 import com.judahben149.note.R
 import com.judahben149.note.adapters.NoteListAdapter
 import com.judahben149.note.databinding.FragmentNoteListBinding
+import com.judahben149.note.util.PopUpMenuFavoriteChecker
 import com.judahben149.note.viewmodel.NoteViewModel
 
 private const val TAG = "NoteListFragment"
@@ -27,6 +28,7 @@ class NoteListFragment : Fragment(), LongPressed {
     private val binding get() = _binding!!
     private lateinit var mViewModel: NoteViewModel
     private lateinit var adapter: NoteListAdapter
+
 
 
     override fun onCreateView(
@@ -195,7 +197,6 @@ class NoteListFragment : Fragment(), LongPressed {
                 Snackbar.make(binding.root, "There is no note to delete", Snackbar.LENGTH_SHORT)
                     .show()
             }
-
         }
         return super.onOptionsItemSelected(item)
     }
@@ -227,14 +228,23 @@ class NoteListFragment : Fragment(), LongPressed {
         }
         popupMenu.show()
 
-        val popUp = PopupMenu::class.java.getDeclaredField("mPopup").apply {
-            this.isAccessible = true
-        }
-        val menu = popUp.get(popupMenu)
-        menu.javaClass.apply {
-            getDeclaredMethod("setForceShowIcon", Boolean::class.java)
-                .invoke(menu, true)
-        }
+        //Use this instead if you want to have menu with icons
+//        try {
+//            val popUp = PopupMenu::class.java.getDeclaredField("mPopup").apply {
+//                this.isAccessible = true
+//            }
+
+//            val menu = popUp.get(popupMenu)
+//            menu.javaClass.apply {
+//                getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+//                    .invoke(menu, true)
+//            }
+//        }
+//        catch (e: Exception) {
+//            Log.e("Popupm", "Error showing menu Icons", e)
+//        } finally {
+//            popupMenu.show()
+//        }
     }
 
 }

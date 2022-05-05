@@ -57,4 +57,5 @@
     <string name="bodyBackPressDialog">Are you sure you want to exit without saving? Note will not be saved.</string>
     <string name="positiveButtonBackPressDialog">Save</string>
     <string name="negativeButtonBackPressDialog">Exit</string>
+    <string name="update">Update</string>
 </resources>

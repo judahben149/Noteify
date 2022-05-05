@@ -10,7 +10,7 @@ class NoteApplication : Application(), SharedPreferences.OnSharedPreferenceChang
     override fun onCreate() {
         super.onCreate()
 
-        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         setTheme(preferences)
 
         preferences.registerOnSharedPreferenceChangeListener(this)

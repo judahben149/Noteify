@@ -39,7 +39,6 @@ class NoteListAdapter(val context: Context, private val longPressed: LongPressed
         }
 
 
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteListRecyclerViewViewHolder {
             val binding = NoteItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return NoteListRecyclerViewViewHolder(binding)
