@@ -48,10 +48,6 @@ class FavoriteNoteDetailsFragment : Fragment() {
 
         isNoteFavorite = args.favoriteNote.favoriteStatus
 
-        binding.btnCancelFavoriteNoteDetailsScreen.setOnClickListener {
-            hideKeyboard()
-            navigateToListFragment()
-        }
 
         binding.btnSaveNoteFavoriteNoteDetailsScreen.setOnClickListener {
             updateNoteInDatabase(isNoteFavorite, false)
@@ -62,6 +58,12 @@ class FavoriteNoteDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    override fun onPause() {
+        //Does this once the fragment is going out of focus. Acts for Auto save
+        updateNoteInDatabase(isNoteFavorite, false)
+        hideKeyboard()
+        super.onPause()
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.favorite_note_details_menu, menu)
@@ -100,7 +102,7 @@ class FavoriteNoteDetailsFragment : Fragment() {
 
     private fun updateNoteInDatabase(favoriteStatus: Boolean, isNoteDeleted: Boolean) {
         val noteTitle = binding.noteTitleFavoriteNoteDetailsScreen.text.toString()
-        val noteBody = binding.noteTitleFavoriteNoteDetailsScreen.text.toString()
+        val noteBody = binding.noteBodyFavoriteNoteDetailsScreen.text.toString()
         val timeUpdated = System.currentTimeMillis()
 
         val note = Note(
