@@ -8,15 +8,9 @@ plugins {
 
 android {
     signingConfigs {
-        debug {
-            storeFile file('/Users/judahben/Documents/keystores/android_factory/keystore.jks')
-            storePassword 'judahjesus'
-            keyAlias 'noteify-key'
-            keyPassword 'judahjesus'
-        }
 
         release {
-            storeFile file('/Users/judahben/Documents/keystores/android_factory/keystore.jks')
+            storeFile file('keystore.jks')
             storePassword 'judahjesus'
             keyAlias 'noteify-key'
             keyPassword 'judahjesus'
@@ -36,10 +30,10 @@ android {
 
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled true
             shrinkResources true
-            debuggable true
-            signingConfig signingConfigs.release
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

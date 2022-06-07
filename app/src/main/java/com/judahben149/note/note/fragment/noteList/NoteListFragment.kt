@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments.notes
+package com.judahben149.note.note.fragment.noteList
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -13,12 +13,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.judahben149.note.LongPressed
+import com.judahben149.note.util.LongPressed
 import com.judahben149.note.R
-import com.judahben149.note.adapters.NoteListAdapter
+import com.judahben149.note.note.adapter.NoteListAdapter
 import com.judahben149.note.databinding.FragmentNoteListBinding
-import com.judahben149.note.util.PopUpMenuFavoriteChecker
-import com.judahben149.note.viewmodel.NoteViewModel
+import com.judahben149.note.note.viewmodel.NoteViewModel
 
 private const val TAG = "NoteListFragment"
 

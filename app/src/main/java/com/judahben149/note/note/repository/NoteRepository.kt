@@ -1,8 +1,8 @@
-package com.judahben149.note.repository
+package com.judahben149.note.note.repository
 
 import androidx.lifecycle.LiveData
-import com.judahben149.note.data.NoteDao
-import com.judahben149.note.model.Note
+import com.judahben149.note.note.data.NoteDao
+import com.judahben149.note.note.model.Note
 
 class NoteRepository(private val noteDao: NoteDao) {
 

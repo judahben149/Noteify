@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments.notes
+package com.judahben149.note.note.fragment.noteList
 
 import android.os.Bundle
 import android.view.*
@@ -10,8 +10,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.judahben149.note.R
 import com.judahben149.note.databinding.FragmentNoteDetailsBinding
 import com.judahben149.note.hideKeyboard
-import com.judahben149.note.model.Note
-import com.judahben149.note.viewmodel.NoteViewModel
+import com.judahben149.note.note.model.Note
+import com.judahben149.note.note.viewmodel.NoteViewModel
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
 
@@ -20,7 +20,7 @@ class NoteDetailsFragment: Fragment() {
         private var _binding: FragmentNoteDetailsBinding? = null
         private val binding get() = _binding!!
 
-        private val args by navArgs<NoteDetailsFragmentArgs>()
+        private val args by navArgs<com.judahben149.note.note.fragment.noteList.NoteDetailsFragmentArgs>()
         private lateinit var mViewmodel: NoteViewModel
 
         private var isNoteFavorite: Boolean = false

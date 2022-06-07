@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments.favoriteNotes
+package com.judahben149.note.note.fragment.addNoteToFavorite
 
 import android.os.Bundle
 import android.view.*
@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.note.R
-import com.judahben149.note.adapters.FavoriteNoteListAdapter
+import com.judahben149.note.note.adapter.FavoriteNoteListAdapter
 import com.judahben149.note.databinding.FragmentFavoriteNoteListBinding
-import com.judahben149.note.viewmodel.FavoriteNoteViewModel
+import com.judahben149.note.note.viewmodel.FavoriteNoteViewModel
 
 class FavoriteNoteListFragment  : Fragment() {
 

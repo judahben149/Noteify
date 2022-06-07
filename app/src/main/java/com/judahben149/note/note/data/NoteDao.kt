@@ -1,8 +1,8 @@
-package com.judahben149.note.data
+package com.judahben149.note.note.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.judahben149.note.model.Note
+import com.judahben149.note.note.model.Note
 
 @Dao
 interface NoteDao {

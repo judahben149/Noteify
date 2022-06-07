@@ -1,4 +1,4 @@
-package com.judahben149.note
+package com.judahben149.note.util
 
 import android.view.View
 

@@ -1,12 +1,12 @@
-package com.judahben149.note.viewmodel
+package com.judahben149.note.note.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.judahben149.note.data.NoteDatabase
-import com.judahben149.note.model.Note
-import com.judahben149.note.repository.NoteRepository
+import com.judahben149.note.NoteDatabase
+import com.judahben149.note.note.model.Note
+import com.judahben149.note.note.repository.NoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

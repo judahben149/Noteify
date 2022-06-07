@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments.notes
+package com.judahben149.note.note.fragment.createNote
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,8 +12,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.judahben149.note.R
 import com.judahben149.note.databinding.FragmentAddNoteBinding
 import com.judahben149.note.hideKeyboard
-import com.judahben149.note.model.Note
-import com.judahben149.note.viewmodel.NoteViewModel
+import com.judahben149.note.note.model.Note
+import com.judahben149.note.note.viewmodel.NoteViewModel
 
 class AddNoteFragment : Fragment() {
 

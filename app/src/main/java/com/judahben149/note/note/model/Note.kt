@@ -1,4 +1,4 @@
-package com.judahben149.note.model
+package com.judahben149.note.note.model
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

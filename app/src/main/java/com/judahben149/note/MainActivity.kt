@@ -1,4 +1,4 @@
-package com.judahben149.note.activities
+package com.judahben149.note
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
