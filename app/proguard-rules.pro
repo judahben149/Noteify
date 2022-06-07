@@ -21,8 +21,8 @@
 #-renamesourcefileattribute SourceFile
 
 -keep class com.judahben149.note.data.*
--keep class com.judahben149.note.model.*
--keep interface com.judahben149.note.LongPressed
+-keep class com.judahben149.note.note.model.*
+-keep interface com.judahben149.note.util.LongPressed
 
 # rules for popup menu class
 -keep class * extends androidx.appcompat.widget.PopupMenu

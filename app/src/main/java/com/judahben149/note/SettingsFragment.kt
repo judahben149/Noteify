@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments
+package com.judahben149.note
 
 import android.content.Intent
 import android.net.Uri
@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.judahben149.note.R
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

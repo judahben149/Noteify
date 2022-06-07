@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments.favoriteNotes
+package com.judahben149.note.note.fragment.addNoteToFavorite
 
 import android.os.Bundle
 import android.view.*
@@ -10,8 +10,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.judahben149.note.R
 import com.judahben149.note.databinding.FragmentFavoriteNoteDetailsBinding
 import com.judahben149.note.hideKeyboard
-import com.judahben149.note.model.Note
-import com.judahben149.note.viewmodel.NoteViewModel
+import com.judahben149.note.note.model.Note
+import com.judahben149.note.note.viewmodel.NoteViewModel
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
 

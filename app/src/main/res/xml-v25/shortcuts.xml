@@ -15,7 +15,7 @@
 
 <!--        <intent-->
 <!--            android:action="RANDOM"-->
-<!--            android:targetClass="com.judahben149.note.fragments.notes.NoteListFragment"-->
+<!--            android:targetClass="com.judahben149.note.note.notes.NoteListFragment"-->
 <!--            android:targetPackage="com.judahben149.note" />-->
 
         <intent

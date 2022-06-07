@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments.deletedNotes
+package com.judahben149.note.note.fragment.deletedNote
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.note.R
-import com.judahben149.note.adapters.DeletedNoteListAdapter
+import com.judahben149.note.note.adapter.DeletedNoteListAdapter
 import com.judahben149.note.databinding.FragmentDeletedNoteListBinding
-import com.judahben149.note.viewmodel.DeletedNoteViewModel
+import com.judahben149.note.note.viewmodel.DeletedNoteViewModel
 
 class DeletedNoteListFragment : Fragment() {
 

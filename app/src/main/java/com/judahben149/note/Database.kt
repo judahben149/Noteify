@@ -1,10 +1,11 @@
-package com.judahben149.note.data
+package com.judahben149.note
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.judahben149.note.model.Note
+import com.judahben149.note.note.data.NoteDao
+import com.judahben149.note.note.model.Note
 
 @Database(entities = [Note::class], exportSchema = false, version = 1)
 abstract class NoteDatabase : RoomDatabase() {

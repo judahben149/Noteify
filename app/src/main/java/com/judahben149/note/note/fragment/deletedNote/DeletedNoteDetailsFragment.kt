@@ -1,4 +1,4 @@
-package com.judahben149.note.fragments.deletedNotes
+package com.judahben149.note.note.fragment.deletedNote
 
 import android.os.Bundle
 import android.view.*
@@ -9,8 +9,8 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.note.R
 import com.judahben149.note.databinding.FragmentDeletedNoteDetailsBinding
-import com.judahben149.note.model.Note
-import com.judahben149.note.viewmodel.DeletedNoteViewModel
+import com.judahben149.note.note.model.Note
+import com.judahben149.note.note.viewmodel.DeletedNoteViewModel
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
 

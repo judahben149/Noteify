@@ -1,4 +1,4 @@
-package com.judahben149.note.adapters
+package com.judahben149.note.note.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.judahben149.note.LongPressed
+import com.judahben149.note.util.LongPressed
 import com.judahben149.note.databinding.NoteItemBinding
-import com.judahben149.note.fragments.notes.NoteListFragmentDirections
-import com.judahben149.note.model.Note
+import com.judahben149.note.note.fragment.noteList.NoteListFragmentDirections
+import com.judahben149.note.note.model.Note
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
 
