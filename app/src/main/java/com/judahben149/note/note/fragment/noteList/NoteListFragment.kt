@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
@@ -29,6 +31,11 @@ class NoteListFragment : Fragment(), LongPressed {
     private lateinit var adapter: NoteListAdapter
 
 
+    //initialize animations
+    private val rotateOpenAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_rotate_open_animation) }
+    private val rotateCloseAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_rotate_close_animation) }
+    private val fromBottomAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_from_bottom_animation) }
+    private val toBottomAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_to_bottom_animation) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
