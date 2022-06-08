@@ -44,10 +44,12 @@
         <entry key="..\:/Users/Judah/AndroidStudioProjects/Note/app/src/main/res/xml/root_preferences.xml" value="0.2046875" />
         <entry key="app/src/main/res/drawable-night/ic_trash_placeholder_black.xml" value="0.1765" />
         <entry key="app/src/main/res/drawable/ic_check_mark.xml" value="0.247" />
+        <entry key="app/src/main/res/drawable/ic_note_icon.xml" value="0.233" />
         <entry key="app/src/main/res/drawable/ic_pencil_edit2.xml" value="0.247" />
         <entry key="app/src/main/res/drawable/ic_popup_menu_star.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_popup_menu_trash_can.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_star_black.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_todo_icon.xml" value="0.233" />
         <entry key="app/src/main/res/drawable/ic_trash_can.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_trash_placeholder.xml" value="0.1765" />
         <entry key="app/src/main/res/layout/fragment_add_note.xml" value="0.35833333333333334" />

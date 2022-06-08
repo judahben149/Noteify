@@ -21,6 +21,9 @@
             app:destination="@id/noteDetailsFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_noteListFragment_to_createTodoFragment"
+            app:destination="@id/createTodoFragment" />
     </fragment>
 
     <fragment
@@ -106,5 +109,15 @@
             android:name="FavoriteNote"
             app:argType="com.judahben149.note.note.model.Note" />
     </fragment>
+    <fragment
+        android:id="@+id/createTodoFragment"
+        android:name="com.judahben149.note.todo.fragment.CreateTodoFragment"
+        android:label="CreateTodoFragment"
+        tools:layout="@layout/fragment_create_todo"/>
+    <fragment
+        android:id="@+id/todoListFragment"
+        android:name="com.judahben149.note.todo.fragment.TodoListFragment"
+        android:label="fragment_todo_list"
+        tools:layout="@layout/fragment_todo_list" />
 
 </navigation>

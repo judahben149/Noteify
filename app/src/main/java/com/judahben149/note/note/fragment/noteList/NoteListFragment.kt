@@ -37,6 +37,8 @@ class NoteListFragment : Fragment(), LongPressed {
     private val fromBottomAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_from_bottom_animation) }
     private val toBottomAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_to_bottom_animation) }
 
+    private var isComposeButtonClicked = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -86,14 +88,68 @@ class NoteListFragment : Fragment(), LongPressed {
             }
         })
 
-        binding.fabAddNoteButton.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_noteListFragment_to_addNoteFragment)
-        }
-
         setUpFloatingActionButton()
 
+        binding.fabAddNoteButton.setOnClickListener {
+//            Navigation.findNavController(binding.root)
+//                .navigate(R.id.action_noteListFragment_to_addNoteFragment)
+            onComposeButtonClicked()
+        }
+
+        binding.fabCreateNote.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_addNoteFragment)
+        }
+
+        binding.fabCreateTodo.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_createTodoFragment)
+        }
+
+
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun onComposeButtonClicked() {
+        setVisibility(isComposeButtonClicked)
+        setAnimation(isComposeButtonClicked)
+        setButtonClickable(isComposeButtonClicked)
+
+        if (!isComposeButtonClicked) {
+            isComposeButtonClicked = true
+        } else {
+            isComposeButtonClicked = false
+        }
+    }
+
+    private fun setButtonClickable(isButtonClicked: Boolean) {
+        if (!isButtonClicked) {
+            binding.fabCreateNote.isClickable = true
+            binding.fabCreateTodo.isClickable = true
+        } else {
+            binding.fabCreateNote.isClickable = false
+            binding.fabCreateTodo.isClickable = false
+        }
+    }
+
+    private fun setVisibility(isButtonClicked: Boolean) {
+        if (!isButtonClicked) {
+            binding.fabCreateTodo.visibility = View.VISIBLE
+            binding.fabCreateNote.visibility = View.VISIBLE
+        } else {
+            binding.fabCreateTodo.visibility = View.INVISIBLE
+            binding.fabCreateNote.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun setAnimation(isButtonClicked: Boolean) {
+        if (!isButtonClicked) {
+            binding.fabCreateNote.startAnimation(fromBottomAnimation)
+            binding.fabCreateTodo.startAnimation(fromBottomAnimation)
+//            binding.fabAddNoteButton.startAnimation(rotateOpenAnimation)
+        } else {
+            binding.fabCreateNote.startAnimation(toBottomAnimation)
+            binding.fabCreateTodo.startAnimation(toBottomAnimation)
+//            binding.fabAddNoteButton.startAnimation(rotateCloseAnimation)
+        }
     }
 
     override fun onDestroyView() {
