@@ -88,13 +88,13 @@ class NoteListFragment : Fragment(), LongPressed {
             }
         })
 
-        setUpFloatingActionButton()
+//        setUpFloatingActionButton()
 
-        binding.fabAddNoteButton.setOnClickListener {
-//            Navigation.findNavController(binding.root)
-//                .navigate(R.id.action_noteListFragment_to_addNoteFragment)
-            onComposeButtonClicked()
-        }
+//        binding.fabAddNoteButton.setOnClickListener {
+////            Navigation.findNavController(binding.root)
+////                .navigate(R.id.action_noteListFragment_to_addNoteFragment)
+//            onComposeButtonClicked()
+//        }
 
         binding.fabCreateNote.setOnClickListener {
             Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_addNoteFragment)
@@ -165,17 +165,17 @@ class NoteListFragment : Fragment(), LongPressed {
         super.onResume()
     }
 
-    private fun setUpFloatingActionButton() {
-        binding.rvList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0) { // Scrolling down
-                    binding.fabAddNoteButton.shrink()
-                } else { // Scrolling up
-                    binding.fabAddNoteButton.extend()
-                }
-            }
-        })
-    }
+//    private fun setUpFloatingActionButton() {
+//        binding.rvList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                if (dy > 0) { // Scrolling down
+//                    binding.fabAddNoteButton.shrink()
+//                } else { // Scrolling up
+//                    binding.fabAddNoteButton.extend()
+//                }
+//            }
+//        })
+//    }
 
 
     private fun setUpViewModelAndObserver() {

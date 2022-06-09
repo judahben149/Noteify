@@ -112,7 +112,7 @@
     <fragment
         android:id="@+id/createTodoFragment"
         android:name="com.judahben149.note.todo.fragment.CreateTodoFragment"
-        android:label="CreateTodoFragment"
+        android:label="Create Todo"
         tools:layout="@layout/fragment_create_todo"/>
     <fragment
         android:id="@+id/todoListFragment"

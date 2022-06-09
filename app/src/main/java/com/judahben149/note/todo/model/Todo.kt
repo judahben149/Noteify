@@ -20,9 +20,9 @@ data class Todo(
     var todoTime: Long,
 
     @ColumnInfo(name = "todo_priority")
-    var isTodoPriority: Int,
+    var isTodoPriority: Int = 0,
 
     @ColumnInfo(name = "todo_completed")
-    var isTodoCompleted: Int
+    var isTodoCompleted: Int = 0
 
 )
