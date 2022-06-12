@@ -11,7 +11,7 @@ data class Todo(
     var id: Int = 1,
 
     @ColumnInfo(name = "todo_title")
-    var todoTitle: String,
+    var todoBody: String,
 
     @ColumnInfo(name = "todo_date")
     var todoDate: Long,
@@ -20,9 +20,9 @@ data class Todo(
     var todoTime: Long,
 
     @ColumnInfo(name = "todo_priority")
-    var isTodoPriority: Int = 0,
+    var isTodoPriority: Boolean = false,
 
     @ColumnInfo(name = "todo_completed")
-    var isTodoCompleted: Int = 0
+    var isTodoCompleted: Boolean = false
 
 )

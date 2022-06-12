@@ -1,9 +1,7 @@
 package com.judahben149.note.todo.data
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Update
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.judahben149.note.todo.model.Todo
 
 @Dao
@@ -14,4 +12,7 @@ interface TodoDao {
 
     @Update
     fun updateTodo(todo: Todo)
+
+    @Query("SELECT * FROM todo_table ORDER BY id ASC")
+    fun readAllTodos(): LiveData<List<Todo>>
 }
