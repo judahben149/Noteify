@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
@@ -29,6 +31,13 @@ class NoteListFragment : Fragment(), LongPressed {
     private lateinit var adapter: NoteListAdapter
 
 
+    //initialize animations
+    private val rotateOpenAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_rotate_open_animation) }
+    private val rotateCloseAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_rotate_close_animation) }
+    private val fromBottomAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_from_bottom_animation) }
+    private val toBottomAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_to_bottom_animation) }
+
+    private var isComposeButtonClicked = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,14 +88,68 @@ class NoteListFragment : Fragment(), LongPressed {
             }
         })
 
-        binding.fabAddNoteButton.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_noteListFragment_to_addNoteFragment)
+//        setUpFloatingActionButton()
+
+//        binding.fabAddNoteButton.setOnClickListener {
+////            Navigation.findNavController(binding.root)
+////                .navigate(R.id.action_noteListFragment_to_addNoteFragment)
+//            onComposeButtonClicked()
+//        }
+
+        binding.fabCreateNote.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_addNoteFragment)
         }
 
-        setUpFloatingActionButton()
+        binding.fabCreateTodo.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_createTodoFragment)
+        }
+
 
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun onComposeButtonClicked() {
+        setVisibility(isComposeButtonClicked)
+        setAnimation(isComposeButtonClicked)
+        setButtonClickable(isComposeButtonClicked)
+
+        if (!isComposeButtonClicked) {
+            isComposeButtonClicked = true
+        } else {
+            isComposeButtonClicked = false
+        }
+    }
+
+    private fun setButtonClickable(isButtonClicked: Boolean) {
+        if (!isButtonClicked) {
+            binding.fabCreateNote.isClickable = true
+            binding.fabCreateTodo.isClickable = true
+        } else {
+            binding.fabCreateNote.isClickable = false
+            binding.fabCreateTodo.isClickable = false
+        }
+    }
+
+    private fun setVisibility(isButtonClicked: Boolean) {
+        if (!isButtonClicked) {
+            binding.fabCreateTodo.visibility = View.VISIBLE
+            binding.fabCreateNote.visibility = View.VISIBLE
+        } else {
+            binding.fabCreateTodo.visibility = View.INVISIBLE
+            binding.fabCreateNote.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun setAnimation(isButtonClicked: Boolean) {
+        if (!isButtonClicked) {
+            binding.fabCreateNote.startAnimation(fromBottomAnimation)
+            binding.fabCreateTodo.startAnimation(fromBottomAnimation)
+//            binding.fabAddNoteButton.startAnimation(rotateOpenAnimation)
+        } else {
+            binding.fabCreateNote.startAnimation(toBottomAnimation)
+            binding.fabCreateTodo.startAnimation(toBottomAnimation)
+//            binding.fabAddNoteButton.startAnimation(rotateCloseAnimation)
+        }
     }
 
     override fun onDestroyView() {
@@ -102,17 +165,17 @@ class NoteListFragment : Fragment(), LongPressed {
         super.onResume()
     }
 
-    private fun setUpFloatingActionButton() {
-        binding.rvList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0) { // Scrolling down
-                    binding.fabAddNoteButton.shrink()
-                } else { // Scrolling up
-                    binding.fabAddNoteButton.extend()
-                }
-            }
-        })
-    }
+//    private fun setUpFloatingActionButton() {
+//        binding.rvList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                if (dy > 0) { // Scrolling down
+//                    binding.fabAddNoteButton.shrink()
+//                } else { // Scrolling up
+//                    binding.fabAddNoteButton.extend()
+//                }
+//            }
+//        })
+//    }
 
 
     private fun setUpViewModelAndObserver() {
