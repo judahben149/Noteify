@@ -27,7 +27,7 @@ class NoteListAdapter(val context: Context, private val longPressed: LongPressed
                 binding.tvNoteTitle.text = currentNote.noteTitle
                 binding.tvNoteDescription.text = currentNote.noteBody
                 binding.tvNoteDate.text = prettyTime
-                if (currentNote.favoriteStatus == true) {
+                if (currentNote.favoriteStatus) {
                     binding.favoriteIcon.visibility = View.VISIBLE
                 } else binding.favoriteIcon.visibility = View.INVISIBLE
 
