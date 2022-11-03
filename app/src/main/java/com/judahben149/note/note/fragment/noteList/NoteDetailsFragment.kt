@@ -1,5 +1,6 @@
 package com.judahben149.note.note.fragment.noteList
 
+
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
