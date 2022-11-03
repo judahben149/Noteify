@@ -5,8 +5,10 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
+import com.judahben149.note.NoteDatabase
 import com.judahben149.note.getOrAwaitValue
-import com.judahben149.note.model.Note
+import com.judahben149.note.note.data.NoteDao
+import com.judahben149.note.note.model.Note
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After

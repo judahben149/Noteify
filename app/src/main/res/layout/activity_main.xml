@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
     android:fitsSystemWindows="true"
-    tools:context=".activities.MainActivity">
+    tools:context=".MainActivity">
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

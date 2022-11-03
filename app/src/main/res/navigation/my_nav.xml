@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/noteListFragment"
-        android:name="com.judahben149.note.fragments.notes.NoteListFragment"
+        android:name="com.judahben149.note.note.fragment.noteList.NoteListFragment"
         android:label="Notes"
         tools:layout="@layout/fragment_note_list" >
         <action
@@ -21,11 +21,14 @@
             app:destination="@id/noteDetailsFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_noteListFragment_to_createTodoFragment"
+            app:destination="@id/createTodoFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/favoriteNoteListFragment"
-        android:name="com.judahben149.note.fragments.favoriteNotes.FavoriteNoteListFragment"
+        android:name="com.judahben149.note.note.fragment.addNoteToFavorite.FavoriteNoteListFragment"
         android:label="Favorites"
         tools:layout="@layout/fragment_favorite_note_list" >
         <action
@@ -35,9 +38,10 @@
 
     <fragment
         android:id="@+id/deletedNoteListFragment"
-        android:name="com.judahben149.note.fragments.deletedNotes.DeletedNoteListFragment"
+        android:name="com.judahben149.note.note.fragment.deletedNote.DeletedNoteListFragment"
         android:label="Trash"
         tools:layout="@layout/fragment_deleted_note_list" >
+
         <action
             android:id="@+id/action_deletedNoteListFragment_to_deletedNoteDetailsFragment"
             app:destination="@id/deletedNoteDetailsFragment" />
@@ -45,7 +49,7 @@
 
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="com.judahben149.note.fragments.notes.AddNoteFragment"
+        android:name="com.judahben149.note.note.fragment.createNote.AddNoteFragment"
         android:label="Create note"
         tools:layout="@layout/fragment_add_note">
         <action
@@ -57,7 +61,7 @@
 
     <fragment
         android:id="@+id/noteDetailsFragment"
-        android:name="com.judahben149.note.fragments.notes.NoteDetailsFragment"
+        android:name="com.judahben149.note.note.fragment.noteList.NoteDetailsFragment"
         android:label="Edit note"
         tools:layout="@layout/fragment_note_details">
         <action
@@ -67,22 +71,23 @@
             app:popUpToInclusive="true"/>
         <argument
             android:name="NoteDetails"
-            app:argType="com.judahben149.note.model.Note" />
+            app:argType="com.judahben149.note.note.model.Note" />
     </fragment>
 
     <fragment
         android:id="@+id/settingsFragment2"
-        android:name="com.judahben149.note.fragments.SettingsFragment"
-        android:label="Settings" />
+        android:name="com.judahben149.note.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@xml/root_preferences"/>
 
     <fragment
         android:id="@+id/deletedNoteDetailsFragment"
-        android:name="com.judahben149.note.fragments.deletedNotes.DeletedNoteDetailsFragment"
+        android:name="com.judahben149.note.note.fragment.deletedNote.DeletedNoteDetailsFragment"
         android:label="View note"
         tools:layout="@layout/fragment_note_details">
         <argument
             android:name="DeletedNote"
-            app:argType="com.judahben149.note.model.Note" />
+            app:argType="com.judahben149.note.note.model.Note" />
         <action
             android:id="@+id/action_deletedNoteDetailsFragment_to_deletedNoteListFragment"
             app:destination="@id/deletedNoteListFragment"
@@ -92,7 +97,7 @@
 
     <fragment
         android:id="@+id/favoriteNoteDetailsFragment"
-        android:name="com.judahben149.note.fragments.favoriteNotes.FavoriteNoteDetailsFragment"
+        android:name="com.judahben149.note.note.fragment.addNoteToFavorite.FavoriteNoteDetailsFragment"
         android:label="Edit note"
         tools:layout="@layout/fragment_favorite_note_details">
         <action
@@ -102,7 +107,21 @@
             app:popUpToInclusive="false"/>
         <argument
             android:name="FavoriteNote"
-            app:argType="com.judahben149.note.model.Note" />
+            app:argType="com.judahben149.note.note.model.Note" />
     </fragment>
+    <fragment
+        android:id="@+id/createTodoFragment"
+        android:name="com.judahben149.note.todo.fragment.CreateTodoFragment"
+        android:label="Create Todo"
+        tools:layout="@layout/fragment_create_todo">
+        <action
+            android:id="@+id/action_createTodoFragment_to_noteListFragment"
+            app:destination="@id/noteListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/todoListFragment"
+        android:name="com.judahben149.note.todo.fragment.TodoListFragment"
+        android:label="fragment_todo_list"
+        tools:layout="@layout/fragment_todo_list" />
 
 </navigation>

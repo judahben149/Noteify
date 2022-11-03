@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_noteList_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -38,11 +39,11 @@
             app:layoutManager="LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/searchView"
+            app:layout_constraintVertical_bias="1.0"
             tools:listitem="@layout/note_item" />
-
 
         <ImageView
             android:id="@+id/note_placeholder"
@@ -56,28 +57,124 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/constraintLayout_fab_layout"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="end|bottom"-->
+    <!--        app:layout_anchor="@id/constraintLayout_noteList_screen"-->
+    <!--        app:layout_anchorGravity="bottom|end">-->
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fab_add_note_button"
-        style="@style/myFAB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:contentDescription="@string/add_note_button"
-        android:text="@string/compose"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        app:icon="@drawable/ic_pencil_edit2"
-        app:iconPadding="10dp"
-        app:iconSize="18dp"
-        app:layout_anchor="@id/rvList"
-        app:layout_anchorGravity="bottom|end"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--            android:id="@+id/fab_create_note"-->
+    <!--            style="@style/myFAB"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="top|end"-->
+    <!--            android:layout_marginBottom="20dp"-->
+    <!--            android:visibility="invisible"-->
+
+    <!--            android:clickable="true"-->
+    <!--            android:contentDescription="Create note"-->
+    <!--            android:focusable="true"-->
+    <!--            android:src="@drawable/ic_note_icon"-->
+    <!--            android:text="Note"-->
+    <!--            app:layout_anchor="@id/fab_create_todo"-->
+    <!--            app:layout_constraintBottom_toTopOf="@+id/fab_create_todo"-->
+    <!--            app:layout_constraintEnd_toEndOf="@+id/fab_add_note_button" />-->
+
+
+    <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--            android:id="@+id/fab_create_todo"-->
+    <!--            style="@style/myFAB"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="top|end"-->
+    <!--            android:layout_marginBottom="20dp"-->
+    <!--            android:visibility="invisible"-->
+
+    <!--            android:clickable="true"-->
+    <!--            android:contentDescription="Create to do"-->
+    <!--            android:focusable="true"-->
+    <!--            android:src="@drawable/ic_todo_icon"-->
+    <!--            app:layout_anchor="@id/fab_add_note_button"-->
+    <!--            app:layout_constraintBottom_toTopOf="@+id/fab_add_note_button"-->
+    <!--            app:layout_constraintEnd_toEndOf="@+id/fab_add_note_button" />-->
+
+    <!--        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton-->
+    <!--            android:id="@+id/fab_add_note_button"-->
+    <!--            style="@style/myFAB"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginEnd="30dp"-->
+    <!--            android:layout_marginBottom="30dp"-->
+    <!--            android:clickable="true"-->
+    <!--            android:contentDescription="@string/add_note_button"-->
+    <!--            android:focusable="true"-->
+    <!--            android:text="@string/compose"-->
+    <!--            android:textAllCaps="false"-->
+    <!--            android:textSize="18sp"-->
+    <!--            app:icon="@drawable/ic_pencil_edit2"-->
+    <!--            app:iconPadding="10dp"-->
+    <!--            app:iconSize="18dp"-->
+
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent" />-->
+
+
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <com.nambimobile.widgets.efab.ExpandableFabLayout
+        android:id="@+id/expandable_fab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <com.nambimobile.widgets.efab.Overlay
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:overlay_color="#000000"
+            app:overlay_alpha="0.75"
+            app:overlay_openingAnimationDurationMs="100"
+            />
+
+
+        <com.nambimobile.widgets.efab.ExpandableFab
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:efab_color="@color/blue_tint"
+            style="@style/myFAB"
+            android:elevation="10dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            app:efab_closingAnticipateTension="0"
+            app:efab_iconAnimationRotationDeg="-225"
+            app:efab_icon="@drawable/ic_plus"/>
+
+        <com.nambimobile.widgets.efab.FabOption
+            android:id="@+id/fab_create_todo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_icon="@drawable/ic_todo_icon"
+            app:fab_color="@color/blue_tint"
+            app:label_text="Todo" />
+
+        <com.nambimobile.widgets.efab.FabOption
+            android:id="@+id/fab_create_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_icon="@drawable/ic_note_icon"
+            app:fab_color="@color/blue_tint"
+            app:label_text="Note" />
+
+
+    </com.nambimobile.widgets.efab.ExpandableFabLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
