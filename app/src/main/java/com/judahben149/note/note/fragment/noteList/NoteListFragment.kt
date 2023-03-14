@@ -181,10 +181,10 @@ class NoteListFragment : Fragment(), LongPressed {
     private fun setUpViewModelAndObserver() {
         //instantiate viewmodel and set up observer
         mViewModel = ViewModelProvider(this)[NoteViewModel::class.java]
-        mViewModel.readAllNotes.observe(viewLifecycleOwner, { note ->
-            adapter.setData(note)
+        mViewModel.readAllNotes.observe(viewLifecycleOwner) { note ->
+            adapter.submitList(note)
             hideOrShowSearchViewAndPlaceholder()
-        })
+        }
     }
 
     private fun hideOrShowSearchViewAndPlaceholder() {
@@ -211,12 +211,12 @@ class NoteListFragment : Fragment(), LongPressed {
     fun searchDatabase(query: String) {
         val searchQuery = "%$query%"
 
-        mViewModel.searchDatabase(searchQuery).observe(this, { list ->
+        mViewModel.searchDatabase(searchQuery).observe(this) { list ->
             list.let {
-                adapter.setData(it)
+                adapter.submitList(it)
             }
 
-        })
+        }
     }
 
 

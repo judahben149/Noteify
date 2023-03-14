@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.judahben149.note.util.LongPressed
 import com.judahben149.note.databinding.NoteItemBinding
@@ -13,26 +15,28 @@ import com.judahben149.note.note.model.Note
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
 
-class NoteListAdapter(val context: Context, private val longPressed: LongPressed): RecyclerView.Adapter<NoteListAdapter.NoteListRecyclerViewViewHolder>() {
+class NoteListAdapter(val context: Context, private val longPressed: LongPressed): ListAdapter<Note, NoteListAdapter.NoteListRecyclerViewViewHolder>(NoteDiffUtil()) {
 
         var noteList = emptyList<Note>()
 
 
         inner class NoteListRecyclerViewViewHolder(private val binding: NoteItemBinding): RecyclerView.ViewHolder(binding.root) {
-            fun bindItem(position: Int) {
-                val currentNote = noteList[position]
+            fun bindItem(noteItem: Note) {
 
-                val prettyTime: String = PrettyTime().format(Date(currentNote.timeUpdated))
+                val prettyTime: String = PrettyTime().format(Date(noteItem.timeUpdated))
 
-                binding.tvNoteTitle.text = currentNote.noteTitle
-                binding.tvNoteDescription.text = currentNote.noteBody
+                binding.tvNoteTitle.text = noteItem.noteTitle
+                binding.tvNoteDescription.text = noteItem.noteBody
                 binding.tvNoteDate.text = prettyTime
-                if (currentNote.favoriteStatus) {
+                if (noteItem.favoriteStatus) {
                     binding.favoriteIcon.visibility = View.VISIBLE
                 } else binding.favoriteIcon.visibility = View.INVISIBLE
 
                 binding.noteItem.setOnClickListener {
-                    val action = NoteListFragmentDirections.actionNoteListFragmentToNoteDetailsFragment(currentNote)
+                    val action =
+                        NoteListFragmentDirections.actionNoteListFragmentToNoteDetailsFragment(
+                            noteItem
+                        )
                     Navigation.findNavController(binding.root).navigate(action)
                 }
             }
@@ -45,7 +49,7 @@ class NoteListAdapter(val context: Context, private val longPressed: LongPressed
         }
 
         override fun onBindViewHolder(holder: NoteListRecyclerViewViewHolder, position: Int) {
-            holder.bindItem(position)
+            holder.bindItem(getItem(position))
 
             holder.itemView.setOnLongClickListener {
                 longPressed.popUpMenu(it, position)
@@ -68,5 +72,16 @@ class NoteListAdapter(val context: Context, private val longPressed: LongPressed
     fun returnItemId(position: Int): Int {
         val selectedNote = noteList[position]
         return selectedNote.id
+    }
+
+    class NoteDiffUtil: DiffUtil.ItemCallback<Note>() {
+        override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
+            return oldItem == newItem
+        }
+
     }
 }
