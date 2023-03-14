@@ -3,8 +3,9 @@ package com.judahben149.note.note.repository
 import androidx.lifecycle.LiveData
 import com.judahben149.note.note.data.NoteDao
 import com.judahben149.note.note.model.Note
+import javax.inject.Inject
 
-class NoteRepository(private val noteDao: NoteDao) {
+class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
 
     val readAllNotes: LiveData<List<Note>> = noteDao.readAllNotes()
     val readAllFavoriteNotes: LiveData<List<Note>> = noteDao.readAllFavoriteNotes()

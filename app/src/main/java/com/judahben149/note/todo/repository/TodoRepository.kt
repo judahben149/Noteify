@@ -1,34 +1,23 @@
 package com.judahben149.note.todo.repository
 
 import android.content.Context
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.judahben149.note.NoteDatabase
 import com.judahben149.note.todo.data.TodoDao
 import com.judahben149.note.todo.model.Todo
+import javax.inject.Inject
 
-class TodoRepository(private val todoDao: TodoDao) {
+class TodoRepository @Inject constructor(private val todoDao: TodoDao) {
 
-    companion object{
 
-        @Volatile
-        private var instance: TodoRepository? = null
-
-        fun getInstance(context: Context): TodoRepository {
-            return instance ?: synchronized(this) {
-                if (instance == null) {
-                    val database = NoteDatabase.getDatabase(context)
-                    instance = TodoRepository(database.todoDao())
-                }
-                return instance as TodoRepository
-            }
-        }
-    }
-
-    suspend fun createTodo(todo: Todo) {
+    @WorkerThread
+    fun createTodo(todo: Todo) {
         todoDao.createTodo(todo)
     }
 
-    suspend fun updateTodo(todo: Todo) {
+    @WorkerThread
+    fun updateTodo(todo: Todo) {
         todoDao.updateTodo(todo)
     }
 

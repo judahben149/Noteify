@@ -9,7 +9,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,14 +20,16 @@ import com.judahben149.note.R
 import com.judahben149.note.note.adapter.NoteListAdapter
 import com.judahben149.note.databinding.FragmentNoteListBinding
 import com.judahben149.note.note.viewmodel.NoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "NoteListFragment"
 
+@AndroidEntryPoint
 class NoteListFragment : Fragment(), LongPressed {
 
     private var _binding: FragmentNoteListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mViewModel: NoteViewModel
+    val mViewModel: NoteViewModel by viewModels()
     private lateinit var adapter: NoteListAdapter
 
 
@@ -53,6 +55,7 @@ class NoteListFragment : Fragment(), LongPressed {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         Log.d(TAG, "onViewCreated")
         adapter = NoteListAdapter(requireContext(), this)
@@ -68,7 +71,7 @@ class NoteListFragment : Fragment(), LongPressed {
             rvList.layoutManager = this
         }
 
-        setUpViewModelAndObserver()
+        setupObservers()
         recyclerViewDivider(rvList, layoutManager)
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -103,9 +106,6 @@ class NoteListFragment : Fragment(), LongPressed {
         binding.fabCreateTodo.setOnClickListener {
             Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_createTodoFragment)
         }
-
-
-        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun onComposeButtonClicked() {
@@ -153,16 +153,16 @@ class NoteListFragment : Fragment(), LongPressed {
     }
 
     override fun onDestroyView() {
+        super.onDestroyView()
         Log.d(TAG, "onDestroyView")
         _binding = null
-        super.onDestroyView()
     }
 
 
     override fun onResume() {
+        super.onResume()
         hideOrShowSearchViewAndPlaceholder()
         Log.d(TAG, "onResume")
-        super.onResume()
     }
 
 //    private fun setUpFloatingActionButton() {
@@ -178,10 +178,8 @@ class NoteListFragment : Fragment(), LongPressed {
 //    }
 
 
-    private fun setUpViewModelAndObserver() {
-        //instantiate viewmodel and set up observer
-        mViewModel = ViewModelProvider(this)[NoteViewModel::class.java]
-        mViewModel.readAllNotes.observe(viewLifecycleOwner) { note ->
+    private fun setupObservers() {
+        mViewModel.readAllNotes().observe(viewLifecycleOwner) { note ->
             adapter.submitList(note)
             hideOrShowSearchViewAndPlaceholder()
         }

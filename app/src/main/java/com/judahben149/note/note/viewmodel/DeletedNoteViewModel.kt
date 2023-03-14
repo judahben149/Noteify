@@ -1,25 +1,21 @@
 package com.judahben149.note.note.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.judahben149.note.NoteDatabase
 import com.judahben149.note.note.model.Note
 import com.judahben149.note.note.repository.NoteRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DeletedNoteViewModel(application: Application) : AndroidViewModel(application) {
-
-    val readAllDeletedNotes: LiveData<List<Note>>
-    private val repository: NoteRepository
+@HiltViewModel
+class DeletedNoteViewModel @Inject constructor(private val repository: NoteRepository) : ViewModel() {
 
 
-    init {
-        val noteDao = NoteDatabase.getDatabase(application).noteDao()
-        repository = NoteRepository(noteDao)
-        readAllDeletedNotes = repository.readAllDeletedNotes
+    fun readAllDeletedNotes(): LiveData<List<Note>> {
+        return repository.readAllDeletedNotes
     }
 
     //methods for deleted notes

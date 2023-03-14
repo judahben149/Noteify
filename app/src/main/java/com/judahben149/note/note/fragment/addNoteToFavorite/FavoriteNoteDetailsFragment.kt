@@ -3,6 +3,7 @@ package com.judahben149.note.note.fragment.addNoteToFavorite
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -20,7 +21,7 @@ class FavoriteNoteDetailsFragment : Fragment() {
     private var _binding: FragmentFavoriteNoteDetailsBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<FavoriteNoteDetailsFragmentArgs>()
-    private lateinit var mViewmodel: NoteViewModel
+    val mViewmodel: NoteViewModel by viewModels()
 
     private var isNoteFavorite: Boolean = false
     var timeCreated: String = ""
@@ -39,7 +40,6 @@ class FavoriteNoteDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        mViewmodel = ViewModelProvider(this).get(NoteViewModel::class.java)
         timeCreated = PrettyTime().format(Date(args.favoriteNote.timeCreated))
 
         binding.noteTitleFavoriteNoteDetailsScreen.setText(args.favoriteNote.noteTitle)

@@ -4,6 +4,7 @@ package com.judahben149.note.note.fragment.noteList
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -13,16 +14,18 @@ import com.judahben149.note.databinding.FragmentNoteDetailsBinding
 import com.judahben149.note.hideKeyboard
 import com.judahben149.note.note.model.Note
 import com.judahben149.note.note.viewmodel.NoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
 
+@AndroidEntryPoint
 class NoteDetailsFragment: Fragment() {
 
         private var _binding: FragmentNoteDetailsBinding? = null
         private val binding get() = _binding!!
 
         private val args by navArgs<com.judahben149.note.note.fragment.noteList.NoteDetailsFragmentArgs>()
-        private lateinit var mViewmodel: NoteViewModel
+        val mViewmodel: NoteViewModel by viewModels()
 
         private var isNoteFavorite: Boolean = false
         private var isNoteDeleted: Boolean = false
@@ -51,7 +54,6 @@ class NoteDetailsFragment: Fragment() {
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-            mViewmodel = ViewModelProvider(this).get(NoteViewModel::class.java)
             timeCreated = PrettyTime().format(Date(args.noteDetails.timeCreated))
 
             binding.noteTitleNoteDetailsScreen.setText(args.noteDetails.noteTitle)

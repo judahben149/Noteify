@@ -4,7 +4,9 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatDelegate
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class NoteApplication : Application(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     override fun onCreate() {

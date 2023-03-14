@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -14,14 +15,16 @@ import com.judahben149.note.R
 import com.judahben149.note.note.adapter.DeletedNoteListAdapter
 import com.judahben149.note.databinding.FragmentDeletedNoteListBinding
 import com.judahben149.note.note.viewmodel.DeletedNoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DeletedNoteListFragment : Fragment() {
 
     private var _binding: FragmentDeletedNoteListBinding? = null
     private val binding get() = _binding!!
     private val adapter = DeletedNoteListAdapter()
     private lateinit var rvList: RecyclerView
-    private lateinit var mViewModel: DeletedNoteViewModel
+    val mViewModel: DeletedNoteViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +42,6 @@ class DeletedNoteListFragment : Fragment() {
         rvList.adapter = adapter
 
         setupRecyclerViewLayout()
-        setUpViewModel()
         setUpObservers()
         setHasOptionsMenu(true)
     }
@@ -80,15 +82,12 @@ class DeletedNoteListFragment : Fragment() {
             }
     }
 
-    private fun setUpViewModel() {
-        mViewModel = ViewModelProvider(this).get(DeletedNoteViewModel::class.java)
-    }
 
     private fun setUpObservers() {
-        mViewModel.readAllDeletedNotes.observe(viewLifecycleOwner, Observer { note ->
+        mViewModel.readAllDeletedNotes().observe(viewLifecycleOwner) { note ->
             adapter.setData(note)
             hideOrShowPlaceholder()
-        })
+        }
     }
 
     private fun deleteNotesForeverDialog() {

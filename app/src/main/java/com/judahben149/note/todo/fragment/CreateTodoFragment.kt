@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.judahben149.note.R
@@ -12,14 +13,15 @@ import com.judahben149.note.databinding.FragmentCreateTodoBinding
 import com.judahben149.note.todo.model.Todo
 import com.judahben149.note.todo.viewmodel.CreateTodoViewModel
 import com.judahben149.note.todo.viewmodel.TodoViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class CreateTodoFragment : Fragment() {
 
     private var _binding: FragmentCreateTodoBinding? = null
     val binding get() =  _binding!!
 
-    private lateinit var viewModel: CreateTodoViewModel
+    val viewModel: CreateTodoViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,9 +29,6 @@ class CreateTodoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentCreateTodoBinding.inflate(inflater, container, false)
-
-        val factory = TodoViewModelFactory.getInstance(requireContext())
-        viewModel = ViewModelProvider(this, factory)[CreateTodoViewModel::class.java]
         return binding.root
     }
 

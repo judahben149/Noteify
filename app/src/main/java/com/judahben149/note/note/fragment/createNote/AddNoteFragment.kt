@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -14,19 +15,20 @@ import com.judahben149.note.databinding.FragmentAddNoteBinding
 import com.judahben149.note.hideKeyboard
 import com.judahben149.note.note.model.Note
 import com.judahben149.note.note.viewmodel.NoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddNoteFragment : Fragment() {
 
     private var _binding: FragmentAddNoteBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mViewmodel: NoteViewModel
+    val mViewmodel: NoteViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddNoteBinding.inflate(inflater, container, false)
-        mViewmodel = ViewModelProvider(this).get(NoteViewModel::class.java)
 
 
         activity?.onBackPressedDispatcher?.addCallback(

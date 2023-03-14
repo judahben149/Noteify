@@ -57,17 +57,6 @@ class NoteListAdapter(val context: Context, private val longPressed: LongPressed
             }
         }
 
-        override fun getItemCount() = noteList.size
-
-
-        fun setData(note: List<Note>) {
-            this.noteList = note
-            notifyDataSetChanged()
-        }
-
-    fun getItemPosition(position: Int): Note {
-        return noteList[position]
-    }
 
     fun returnItemId(position: Int): Int {
         val selectedNote = noteList[position]
@@ -76,7 +65,7 @@ class NoteListAdapter(val context: Context, private val longPressed: LongPressed
 
     class NoteDiffUtil: DiffUtil.ItemCallback<Note>() {
         override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {

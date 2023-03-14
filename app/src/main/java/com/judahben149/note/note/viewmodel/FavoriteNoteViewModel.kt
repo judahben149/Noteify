@@ -1,26 +1,21 @@
 package com.judahben149.note.note.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.judahben149.note.NoteDatabase
 import com.judahben149.note.note.model.Note
 import com.judahben149.note.note.repository.NoteRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FavoriteNoteViewModel(application: Application): AndroidViewModel(application) {
+@HiltViewModel
+class FavoriteNoteViewModel @Inject constructor(private val repository: NoteRepository): ViewModel() {
 
-    private val repository: NoteRepository
-    val readAllFavoriteNotes: LiveData<List<Note>>
-
-    init {
-        val noteDao = NoteDatabase.getDatabase(application).noteDao()
-        repository = NoteRepository(noteDao)
-        readAllFavoriteNotes = repository.readAllFavoriteNotes
+    fun readAllFavoriteNotes(): LiveData<List<Note>> {
+        return repository.readAllFavoriteNotes
     }
-
     fun removeAllNotesFromFavorites() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.removeAllNotesFromFavorites()

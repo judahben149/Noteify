@@ -3,6 +3,7 @@ package com.judahben149.note.note.fragment.addNoteToFavorite
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,13 +13,15 @@ import com.judahben149.note.R
 import com.judahben149.note.note.adapter.FavoriteNoteListAdapter
 import com.judahben149.note.databinding.FragmentFavoriteNoteListBinding
 import com.judahben149.note.note.viewmodel.FavoriteNoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoriteNoteListFragment  : Fragment() {
 
     private var _binding: FragmentFavoriteNoteListBinding? = null
     private val binding get() = _binding!!
     private val adapter = FavoriteNoteListAdapter()
-    private lateinit var mViewModel: FavoriteNoteViewModel
+    val mViewModel: FavoriteNoteViewModel by viewModels()
     private lateinit var rvList: RecyclerView
 
 
@@ -38,7 +41,6 @@ class FavoriteNoteListFragment  : Fragment() {
         rvList.adapter = adapter
 
         setupRecyclerViewLayout() //this has a function which sets up divider
-        setUpViewModel()
         setUpObservers()
         setHasOptionsMenu(true)
     }
@@ -48,16 +50,11 @@ class FavoriteNoteListFragment  : Fragment() {
         super.onDestroyView()
     }
 
-
-    private fun setUpViewModel() {
-        mViewModel = ViewModelProvider(this).get(FavoriteNoteViewModel::class.java)
-    }
-
     private fun setUpObservers() {
-        mViewModel.readAllFavoriteNotes.observe(viewLifecycleOwner, { note ->
+        mViewModel.readAllFavoriteNotes().observe(viewLifecycleOwner) { note ->
             adapter.setData(note)
             hideOrShowPlaceholder()
-        })
+        }
     }
 
     private fun setupRecyclerViewLayout() {

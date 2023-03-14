@@ -3,7 +3,7 @@ package com.judahben149.note.note.fragment.deletedNote
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
@@ -11,15 +11,17 @@ import com.judahben149.note.R
 import com.judahben149.note.databinding.FragmentDeletedNoteDetailsBinding
 import com.judahben149.note.note.model.Note
 import com.judahben149.note.note.viewmodel.DeletedNoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
 
+@AndroidEntryPoint
 class DeletedNoteDetailsFragment : Fragment() {
 
     private var _binding: FragmentDeletedNoteDetailsBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<DeletedNoteDetailsFragmentArgs>()
-    private lateinit var mViewmodel: DeletedNoteViewModel
+    val mViewModel: DeletedNoteViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +33,6 @@ class DeletedNoteDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mViewmodel = ViewModelProvider(this).get(DeletedNoteViewModel::class.java)
         val timeCreated = PrettyTime().format(Date(args.deletedNote.timeCreated))
 
         binding.noteTitleDeletedNoteDetailsScreen.text = args.deletedNote.noteTitle
@@ -83,7 +84,7 @@ class DeletedNoteDetailsFragment : Fragment() {
             args.deletedNote.timeUpdated,
             deletedStatus = false
         )
-        mViewmodel.updateNote(noteToRestore)
+        mViewModel.updateNote(noteToRestore)
         navigateToListFragment()
         Snackbar.make(binding.root, "Note restored", Snackbar.LENGTH_SHORT).show()
     }
@@ -99,7 +100,7 @@ class DeletedNoteDetailsFragment : Fragment() {
             args.deletedNote.timeUpdated,
             deletedStatus = false
         )
-        mViewmodel.deleteNote(noteToDelete)
+        mViewModel.deleteNote(noteToDelete)
         navigateToListFragment()
         Snackbar.make(binding.root, "Note deleted permanently", Snackbar.LENGTH_SHORT).show()
     }
