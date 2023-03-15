@@ -1,19 +1,19 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
+    id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
     id 'androidx.navigation.safeargs'
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.judahben149.note"
         minSdk 23
-        targetSdk 31
+        targetSdk 33
         versionCode 3
         versionName "1.2"
 
@@ -55,8 +55,8 @@ dependencies {
     testImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Navigation Component
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0-rc01'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.0-rc01'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0-alpha07'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0-alpha07'
 
     // Room components
     implementation "androidx.room:room-runtime:2.4.0"
@@ -70,7 +70,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
 
     // Kotlin components
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.6.0"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
 

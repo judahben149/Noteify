@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
@@ -13,9 +12,11 @@ import com.judahben149.note.databinding.FragmentFavoriteNoteDetailsBinding
 import com.judahben149.note.hideKeyboard
 import com.judahben149.note.note.model.Note
 import com.judahben149.note.note.viewmodel.NoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
 
+@AndroidEntryPoint
 class FavoriteNoteDetailsFragment : Fragment() {
 
     private var _binding: FragmentFavoriteNoteDetailsBinding? = null
