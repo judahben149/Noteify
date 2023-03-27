@@ -15,7 +15,7 @@ import com.judahben149.note.note.model.Note
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
 
-class NoteListAdapter(val context: Context, private val longPressed: LongPressed): ListAdapter<Note, NoteListAdapter.NoteListRecyclerViewViewHolder>(NoteDiffUtil()) {
+class NoteListAdapter(val context: Context, private val longPressed: LongPressed, val onItemClicked: (note: Note) -> Unit): ListAdapter<Note, NoteListAdapter.NoteListRecyclerViewViewHolder>(NoteDiffUtil()) {
 
         var noteList = emptyList<Note>()
 
@@ -32,13 +32,7 @@ class NoteListAdapter(val context: Context, private val longPressed: LongPressed
                     binding.favoriteIcon.visibility = View.VISIBLE
                 } else binding.favoriteIcon.visibility = View.INVISIBLE
 
-                binding.noteItem.setOnClickListener {
-                    val action =
-                        NoteListFragmentDirections.actionNoteListFragmentToNoteDetailsFragment(
-                            noteItem
-                        )
-                    Navigation.findNavController(binding.root).navigate(action)
-                }
+                binding.noteItem.setOnClickListener { onItemClicked(noteItem) }
             }
         }
 
@@ -65,7 +59,7 @@ class NoteListAdapter(val context: Context, private val longPressed: LongPressed
 
     class NoteDiffUtil: DiffUtil.ItemCallback<Note>() {
         override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
-            return oldItem == newItem
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {

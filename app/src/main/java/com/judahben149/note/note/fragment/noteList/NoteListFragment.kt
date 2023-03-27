@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -19,6 +20,7 @@ import com.judahben149.note.util.LongPressed
 import com.judahben149.note.R
 import com.judahben149.note.note.adapter.NoteListAdapter
 import com.judahben149.note.databinding.FragmentNoteListBinding
+import com.judahben149.note.note.model.Note
 import com.judahben149.note.note.viewmodel.NoteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +31,7 @@ class NoteListFragment : Fragment(), LongPressed {
 
     private var _binding: FragmentNoteListBinding? = null
     private val binding get() = _binding!!
-    val mViewModel: NoteViewModel by viewModels()
+    val mViewModel: NoteViewModel by activityViewModels()
     private lateinit var adapter: NoteListAdapter
 
 
@@ -58,7 +60,15 @@ class NoteListFragment : Fragment(), LongPressed {
         super.onViewCreated(view, savedInstanceState)
 
         Log.d(TAG, "onViewCreated")
-        adapter = NoteListAdapter(requireContext(), this)
+
+        val onNoteItemClicked: (noteItem: Note) -> Unit = { noteItem ->
+            val action =
+                NoteListFragmentDirections.actionNoteListFragmentToNoteDetailsFragment(
+                    noteItem
+                )
+            Navigation.findNavController(binding.root).navigate(action)
+        }
+        adapter = NoteListAdapter(requireContext(), this, onNoteItemClicked)
 
         val rvList = binding.rvList
         rvList.adapter = adapter
@@ -179,7 +189,7 @@ class NoteListFragment : Fragment(), LongPressed {
 
 
     private fun setupObservers() {
-        mViewModel.readAllNotes().observe(viewLifecycleOwner) { note ->
+        mViewModel.readAllNotes.observe(viewLifecycleOwner) { note ->
             adapter.submitList(note)
             hideOrShowSearchViewAndPlaceholder()
         }

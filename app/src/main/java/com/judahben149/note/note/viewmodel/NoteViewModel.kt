@@ -14,9 +14,8 @@ import javax.inject.Inject
 class NoteViewModel @Inject constructor(private val repository: NoteRepository) : ViewModel() {
 
 
-    fun readAllNotes(): LiveData<List<Note>> {
-        return repository.readAllNotes
-    }
+    val readAllNotes: LiveData<List<Note>> = repository.readAllNotes
+
 
     fun addNote(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
