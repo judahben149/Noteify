@@ -70,8 +70,8 @@
             app:popUpTo="@id/my_nav.xml"
             app:popUpToInclusive="true"/>
         <argument
-            android:name="NoteDetails"
-            app:argType="com.judahben149.note.note.model.Note" />
+            android:name="NoteId"
+            app:argType="integer" />
     </fragment>
 
     <fragment

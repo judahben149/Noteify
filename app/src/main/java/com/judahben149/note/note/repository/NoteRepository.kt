@@ -12,6 +12,9 @@ class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
     val readAllDeletedNotes: LiveData<List<Note>> = noteDao.readAllDeletedNotes()
 
 
+    fun getNoteByID(noteId: Int): LiveData<Note> {
+       return noteDao.getNoteByID(noteId)
+    }
 
     suspend fun addNote(note: Note) {
         noteDao.addNote(note)

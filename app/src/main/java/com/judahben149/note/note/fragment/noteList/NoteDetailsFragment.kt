@@ -4,9 +4,11 @@ package com.judahben149.note.note.fragment.noteList
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.note.R
@@ -19,115 +21,107 @@ import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
 
 @AndroidEntryPoint
-class NoteDetailsFragment: Fragment() {
-
-        private var _binding: FragmentNoteDetailsBinding? = null
-        private val binding get() = _binding!!
-
-        private val args by navArgs<com.judahben149.note.note.fragment.noteList.NoteDetailsFragmentArgs>()
-        val mViewmodel: NoteViewModel by viewModels()
-
-        private var isNoteFavorite: Boolean = false
-        private var isNoteDeleted: Boolean = false
-
-        var timeCreated: String = ""
-
-        override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View? {
-            _binding = FragmentNoteDetailsBinding.inflate(inflater, container, false)
-            setHasOptionsMenu(true)
+class NoteDetailsFragment : Fragment() {
 
 
-//        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                hideKeyboard()
-//                updateNoteInDatabase(isNoteFavorite)
-//                navigateToListFragment()
-//            }
-//        })
-            return binding.root
-        }
+    private var _binding: FragmentNoteDetailsBinding? = null
+    private val binding get() = _binding!!
+
+    private val args by navArgs<com.judahben149.note.note.fragment.noteList.NoteDetailsFragmentArgs>()
+    val mViewmodel: NoteViewModel by activityViewModels()
+
+    private val navController by lazy { findNavController() }
+
+    //other variables
+    private var isNoteFavorite: Boolean = false
+    private var isNoteDeleted: Boolean = false
+    var timeCreated: String = ""
+
+    lateinit var noteDetails: Note
 
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentNoteDetailsBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
+        return binding.root
+    }
 
-            timeCreated = PrettyTime().format(Date(args.noteDetails.timeCreated))
 
-            binding.noteTitleNoteDetailsScreen.setText(args.noteDetails.noteTitle)
-            binding.noteBodyNoteDetailsScreen.setText(args.noteDetails.noteBody)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+        mViewmodel.getNoteByID(args.noteId).observe(viewLifecycleOwner) { note ->
+            noteDetails = note
+
+            timeCreated = PrettyTime().format(Date(noteDetails.timeCreated))
+
+            binding.noteTitleNoteDetailsScreen.setText(noteDetails.noteTitle)
+            binding.noteBodyNoteDetailsScreen.setText(noteDetails.noteBody)
             binding.dateCreatedNoteDetailsScreen.text = "Created: $timeCreated"
 
-            isNoteFavorite = args.noteDetails.favoriteStatus
-
-//            binding.btnCancelNoteDetailsScreen.setOnClickListener {
-//                hideKeyboard()
-//                navigateToListFragment()
-//            }
-//
-//            binding.btnSaveNoteNoteDetailsScreen.setOnClickListener {
-//                updateNoteInDatabase(isNoteFavorite, false)
-//                hideKeyboard()
-//                navigateToListFragment()
-//            }
-
-            super.onViewCreated(view, savedInstanceState)
+            isNoteFavorite = noteDetails.favoriteStatus
         }
 
 
-        override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-            inflater.inflate(R.menu.note_details_menu, menu)
-            super.onCreateOptionsMenu(menu, inflater)
-        }
+        super.onViewCreated(view, savedInstanceState)
+    }
 
 
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            if (item.itemId == R.id.addToFavorites) {
-                Snackbar.make(binding.root, "Note added to favorites", Snackbar.LENGTH_SHORT).show()
-                isNoteFavorite = true
-            } else if (item.itemId == R.id.deleteNote){
-                isNoteDeleted = true
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.note_details_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.addToFavorites) {
+            Snackbar.make(binding.root, "Note added to favorites", Snackbar.LENGTH_SHORT).show()
+            isNoteFavorite = true
+        } else if (item.itemId == R.id.deleteNote) {
+            isNoteDeleted = true
 //                updateNoteInDatabase(isNoteFavorite, isNoteDeleted)
-                navigateToListFragment()
-                Snackbar.make(binding.root, "Note added to trash", Snackbar.LENGTH_SHORT).show()
-            }
-            return super.onOptionsItemSelected(item)
+            navigateToListFragment()
+            Snackbar.make(binding.root, "Note added to trash", Snackbar.LENGTH_SHORT).show()
         }
+        return super.onOptionsItemSelected(item)
+    }
 
 
-        override fun onPause() {
-            //this saves the note once the fragment loses focus or is going to be destroyed. Acts for Auto-save
-            hideKeyboard()
-            updateNoteInDatabase(isNoteFavorite, isNoteDeleted)
-            super.onPause()
-        }
+    override fun onPause() {
+        //this saves the note once the fragment loses focus or is going to be destroyed. Acts for Auto-save
+        hideKeyboard()
+        updateNoteInDatabase(isNoteFavorite, isNoteDeleted)
+        super.onPause()
+    }
 
-        override fun onDestroyView() {
-            _binding = null
-            super.onDestroyView()
-        }
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
 
-        private fun updateNoteInDatabase(isNoteFavorite: Boolean, isNoteDeleted: Boolean) {
-            val noteTitle = binding.noteTitleNoteDetailsScreen.text.toString()
-            val noteBody = binding.noteBodyNoteDetailsScreen.text.toString()
-            val timeUpdated = System.currentTimeMillis()
+    private fun updateNoteInDatabase(isNoteFavorite: Boolean, isNoteDeleted: Boolean) {
+        val noteTitle = binding.noteTitleNoteDetailsScreen.text.toString()
+        val noteBody = binding.noteBodyNoteDetailsScreen.text.toString()
+        val timeUpdated = System.currentTimeMillis()
 
-            val note = Note(
-                args.noteDetails.id,
-                noteTitle,
-                noteBody,
-                favoriteStatus = isNoteFavorite,
-                timeCreated = args.noteDetails.timeCreated,
-                timeUpdated = timeUpdated,
-                deletedStatus = isNoteDeleted,
-                timeDeleted = timeUpdated
-            )
-            mViewmodel.updateNote(note)
-        }
+        val note = Note(
+            noteDetails.id,
+            noteTitle,
+            noteBody,
+            favoriteStatus = isNoteFavorite,
+            timeCreated = noteDetails.timeCreated,
+            timeUpdated = timeUpdated,
+            deletedStatus = isNoteDeleted,
+            timeDeleted = timeUpdated
+        )
+        mViewmodel.updateNote(note)
+    }
 
-        private fun navigateToListFragment() {
-            Navigation.findNavController(binding.root).navigate(R.id.action_noteDetailsFragment_to_noteListFragment)
-        }
+    private fun navigateToListFragment() {
+        navController.popBackStack()
+    }
 }

@@ -12,6 +12,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,13 +34,34 @@ class NoteListFragment : Fragment(), LongPressed {
     private val binding get() = _binding!!
     val mViewModel: NoteViewModel by activityViewModels()
     private lateinit var adapter: NoteListAdapter
+    private val navController by lazy { findNavController() }
 
 
     //initialize animations
-    private val rotateOpenAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_rotate_open_animation) }
-    private val rotateCloseAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_rotate_close_animation) }
-    private val fromBottomAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_from_bottom_animation) }
-    private val toBottomAnimation: Animation by lazy { AnimationUtils.loadAnimation(context, R.anim.fab_to_bottom_animation) }
+    private val rotateOpenAnimation: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.fab_rotate_open_animation
+        )
+    }
+    private val rotateCloseAnimation: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.fab_rotate_close_animation
+        )
+    }
+    private val fromBottomAnimation: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.fab_from_bottom_animation
+        )
+    }
+    private val toBottomAnimation: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.fab_to_bottom_animation
+        )
+    }
 
     private var isComposeButtonClicked = false
 
@@ -61,10 +83,10 @@ class NoteListFragment : Fragment(), LongPressed {
 
         Log.d(TAG, "onViewCreated")
 
-        val onNoteItemClicked: (noteItem: Note) -> Unit = { noteItem ->
+        val onNoteItemClicked: (noteId: Int) -> Unit = { noteId ->
             val action =
                 NoteListFragmentDirections.actionNoteListFragmentToNoteDetailsFragment(
-                    noteItem
+                    noteId
                 )
             Navigation.findNavController(binding.root).navigate(action)
         }
@@ -101,20 +123,18 @@ class NoteListFragment : Fragment(), LongPressed {
             }
         })
 
-//        setUpFloatingActionButton()
+        setUpFloatingActionButton()
 
-//        binding.fabAddNoteButton.setOnClickListener {
-////            Navigation.findNavController(binding.root)
-////                .navigate(R.id.action_noteListFragment_to_addNoteFragment)
-//            onComposeButtonClicked()
-//        }
+        binding.fabAddNoteButton.setOnClickListener {
+            onComposeButtonClicked()
+        }
 
         binding.fabCreateNote.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_addNoteFragment)
+            navController.navigate(R.id.action_noteListFragment_to_addNoteFragment)
         }
 
         binding.fabCreateTodo.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_createTodoFragment)
+            navController.navigate(R.id.action_noteListFragment_to_createTodoFragment)
         }
     }
 
@@ -123,11 +143,12 @@ class NoteListFragment : Fragment(), LongPressed {
         setAnimation(isComposeButtonClicked)
         setButtonClickable(isComposeButtonClicked)
 
-        if (!isComposeButtonClicked) {
-            isComposeButtonClicked = true
+        if (isComposeButtonClicked) {
+            binding.flScrimOverlay.visibility = View.INVISIBLE
         } else {
-            isComposeButtonClicked = false
+            binding.flScrimOverlay.visibility = View.VISIBLE
         }
+        isComposeButtonClicked = !isComposeButtonClicked
     }
 
     private fun setButtonClickable(isButtonClicked: Boolean) {
@@ -175,17 +196,17 @@ class NoteListFragment : Fragment(), LongPressed {
         Log.d(TAG, "onResume")
     }
 
-//    private fun setUpFloatingActionButton() {
-//        binding.rvList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                if (dy > 0) { // Scrolling down
-//                    binding.fabAddNoteButton.shrink()
-//                } else { // Scrolling up
-//                    binding.fabAddNoteButton.extend()
-//                }
-//            }
-//        })
-//    }
+    private fun setUpFloatingActionButton() {
+        binding.rvList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) { // Scrolling down
+                    binding.fabAddNoteButton.shrink()
+                } else { // Scrolling up
+                    binding.fabAddNoteButton.extend()
+                }
+            }
+        })
+    }
 
 
     private fun setupObservers() {

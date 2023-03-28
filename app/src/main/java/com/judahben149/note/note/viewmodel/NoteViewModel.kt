@@ -8,6 +8,7 @@ import com.judahben149.note.note.repository.NoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,11 +30,15 @@ class NoteViewModel @Inject constructor(private val repository: NoteRepository) 
         }
     }
 
+    fun getNoteByID(noteId: Int): LiveData<Note> = repository.getNoteByID(noteId)
+
+
     fun deleteNote(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteNote(note)
         }
     }
+
     fun sendSingleNoteToTrash(time_deleted: Long, id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.sendSingleNoteToTrash(time_deleted, id)

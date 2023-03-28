@@ -11,6 +11,9 @@ interface NoteDao {
     @Query("SELECT * FROM note_table WHERE deleted_status=0 ORDER BY id ASC")
     fun readAllNotes(): LiveData<List<Note>>
 
+    @Query("SELECT * FROM note_table WHERE id = :noteId")
+    fun getNoteByID(noteId: Int): LiveData<Note>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addNote(note: Note)
 
