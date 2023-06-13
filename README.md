@@ -1,5 +1,5 @@
 # Noteify
-Note-taking application built to learn to work with the ROOM database. Project was started on the now "Noteify-void" repo but moved here midway due to certain issues.
+Noteify is a clean and functional note-taking application.
 
 ________________________
 ### Link to application on [Playstore](https://play.google.com/store/apps/details?id=com.judahben149.note)
