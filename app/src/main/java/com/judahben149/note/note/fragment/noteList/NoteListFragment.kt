@@ -3,25 +3,28 @@ package com.judahben149.note.note.fragment.noteList
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.PopupMenu
-import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.judahben149.note.util.LongPressed
 import com.judahben149.note.R
-import com.judahben149.note.note.adapter.NoteListAdapter
 import com.judahben149.note.databinding.FragmentNoteListBinding
+import com.judahben149.note.note.adapter.NoteListAdapter
 import com.judahben149.note.note.model.Note
 import com.judahben149.note.note.viewmodel.NoteViewModel
+import com.judahben149.note.util.LongPressed
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "NoteListFragment"
@@ -84,7 +87,6 @@ class NoteListFragment : Fragment(), LongPressed {
         }
 
         setupObservers()
-        recyclerViewDivider(rvList, layoutManager)
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -107,10 +109,6 @@ class NoteListFragment : Fragment(), LongPressed {
         binding.fabCreateNote.setOnClickListener {
             Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_addNoteFragment)
         }
-
-//        binding.fabCreateTodo.setOnClickListener {
-//            Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_createTodoFragment)
-//        }
     }
 
     private fun onComposeButtonClicked() {
@@ -118,21 +116,11 @@ class NoteListFragment : Fragment(), LongPressed {
         setAnimation(isComposeButtonClicked)
         setButtonClickable(isComposeButtonClicked)
 
-        if (!isComposeButtonClicked) {
-            isComposeButtonClicked = true
-        } else {
-            isComposeButtonClicked = false
-        }
+        isComposeButtonClicked = !isComposeButtonClicked
     }
 
     private fun setButtonClickable(isButtonClicked: Boolean) {
-        if (!isButtonClicked) {
-            binding.fabCreateNote.isClickable = true
-//            binding.fabCreateTodo.isClickable = true
-        } else {
-            binding.fabCreateNote.isClickable = false
-//            binding.fabCreateTodo.isClickable = false
-        }
+        binding.fabCreateNote.isClickable = !isButtonClicked
     }
 
     private fun setVisibility(isButtonClicked: Boolean) {
@@ -198,15 +186,6 @@ class NoteListFragment : Fragment(), LongPressed {
             binding.searchView.visibility = View.VISIBLE
             binding.notePlaceholder.visibility = View.INVISIBLE
         }
-    }
-
-
-    private fun recyclerViewDivider(rvList: RecyclerView, layoutManager: LinearLayoutManager) {
-        //this adds the divider line in between each item
-        DividerItemDecoration(requireContext(), layoutManager.orientation)
-            .apply {
-                rvList.addItemDecoration(this)
-            }
     }
 
 
