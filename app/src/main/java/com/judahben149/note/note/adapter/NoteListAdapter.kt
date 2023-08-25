@@ -17,9 +17,6 @@ import java.util.*
 
 class NoteListAdapter(val context: Context, private val longPressed: LongPressed, val onItemClicked: (note: Note) -> Unit): ListAdapter<Note, NoteListAdapter.NoteListRecyclerViewViewHolder>(NoteDiffUtil()) {
 
-        var noteList = emptyList<Note>()
-
-
         inner class NoteListRecyclerViewViewHolder(private val binding: NoteItemBinding): RecyclerView.ViewHolder(binding.root) {
             fun bindItem(noteItem: Note) {
 
@@ -53,8 +50,7 @@ class NoteListAdapter(val context: Context, private val longPressed: LongPressed
 
 
     fun returnItemId(position: Int): Int {
-        val selectedNote = noteList[position]
-        return selectedNote.id
+        return getItem(position).id
     }
 
     class NoteDiffUtil: DiffUtil.ItemCallback<Note>() {
