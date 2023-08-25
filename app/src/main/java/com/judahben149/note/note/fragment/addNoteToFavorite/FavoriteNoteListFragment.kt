@@ -1,17 +1,20 @@
 package com.judahben149.note.note.fragment.addNoteToFavorite
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.judahben149.note.R
-import com.judahben149.note.note.adapter.FavoriteNoteListAdapter
 import com.judahben149.note.databinding.FragmentFavoriteNoteListBinding
+import com.judahben149.note.note.adapter.FavoriteNoteListAdapter
 import com.judahben149.note.note.viewmodel.FavoriteNoteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,7 +43,7 @@ class FavoriteNoteListFragment  : Fragment() {
         rvList = binding.rvFavoritesNotesList
         rvList.adapter = adapter
 
-        setupRecyclerViewLayout() //this has a function which sets up divider
+        setupRecyclerViewLayout()
         setUpObservers()
         setHasOptionsMenu(true)
     }
@@ -61,17 +64,8 @@ class FavoriteNoteListFragment  : Fragment() {
         val layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false).apply {
             rvList.layoutManager = this
         }
-        recyclerViewDivider(rvList, layoutManager)
     }
 
-
-    private fun recyclerViewDivider(rvList: RecyclerView, layoutManager: LinearLayoutManager) {
-        //this adds the divider line in between each item
-        DividerItemDecoration(requireContext(), layoutManager.orientation)
-            .apply {
-                rvList.addItemDecoration(this)
-            }
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.favorite_notes_menu, menu)
