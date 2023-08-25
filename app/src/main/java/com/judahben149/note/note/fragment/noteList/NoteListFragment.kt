@@ -73,6 +73,8 @@ class NoteListFragment : Fragment(), LongPressed {
         val rvList = binding.rvList
         rvList.adapter = adapter
 
+        setUpFloatingActionButton()
+
         val layoutManager = LinearLayoutManager(
             requireContext(),
             RecyclerView.VERTICAL,
@@ -101,21 +103,14 @@ class NoteListFragment : Fragment(), LongPressed {
             }
         })
 
-//        setUpFloatingActionButton()
-
-//        binding.fabAddNoteButton.setOnClickListener {
-////            Navigation.findNavController(binding.root)
-////                .navigate(R.id.action_noteListFragment_to_addNoteFragment)
-//            onComposeButtonClicked()
-//        }
 
         binding.fabCreateNote.setOnClickListener {
             Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_addNoteFragment)
         }
 
-        binding.fabCreateTodo.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_createTodoFragment)
-        }
+//        binding.fabCreateTodo.setOnClickListener {
+//            Navigation.findNavController(binding.root).navigate(R.id.action_noteListFragment_to_createTodoFragment)
+//        }
     }
 
     private fun onComposeButtonClicked() {
@@ -133,19 +128,19 @@ class NoteListFragment : Fragment(), LongPressed {
     private fun setButtonClickable(isButtonClicked: Boolean) {
         if (!isButtonClicked) {
             binding.fabCreateNote.isClickable = true
-            binding.fabCreateTodo.isClickable = true
+//            binding.fabCreateTodo.isClickable = true
         } else {
             binding.fabCreateNote.isClickable = false
-            binding.fabCreateTodo.isClickable = false
+//            binding.fabCreateTodo.isClickable = false
         }
     }
 
     private fun setVisibility(isButtonClicked: Boolean) {
         if (!isButtonClicked) {
-            binding.fabCreateTodo.visibility = View.VISIBLE
+//            binding.fabCreateTodo.visibility = View.VISIBLE
             binding.fabCreateNote.visibility = View.VISIBLE
         } else {
-            binding.fabCreateTodo.visibility = View.INVISIBLE
+//            binding.fabCreateTodo.visibility = View.INVISIBLE
             binding.fabCreateNote.visibility = View.INVISIBLE
         }
     }
@@ -153,11 +148,11 @@ class NoteListFragment : Fragment(), LongPressed {
     private fun setAnimation(isButtonClicked: Boolean) {
         if (!isButtonClicked) {
             binding.fabCreateNote.startAnimation(fromBottomAnimation)
-            binding.fabCreateTodo.startAnimation(fromBottomAnimation)
+//            binding.fabCreateTodo.startAnimation(fromBottomAnimation)
 //            binding.fabAddNoteButton.startAnimation(rotateOpenAnimation)
         } else {
             binding.fabCreateNote.startAnimation(toBottomAnimation)
-            binding.fabCreateTodo.startAnimation(toBottomAnimation)
+//            binding.fabCreateTodo.startAnimation(toBottomAnimation)
 //            binding.fabAddNoteButton.startAnimation(rotateCloseAnimation)
         }
     }
@@ -175,17 +170,17 @@ class NoteListFragment : Fragment(), LongPressed {
         Log.d(TAG, "onResume")
     }
 
-//    private fun setUpFloatingActionButton() {
-//        binding.rvList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                if (dy > 0) { // Scrolling down
-//                    binding.fabAddNoteButton.shrink()
-//                } else { // Scrolling up
-//                    binding.fabAddNoteButton.extend()
-//                }
-//            }
-//        })
-//    }
+    private fun setUpFloatingActionButton() {
+        binding.rvList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) { // Scrolling down
+                    binding.fabCreateNote.shrink()
+                } else { // Scrolling up
+                    binding.fabCreateNote.extend()
+                }
+            }
+        })
+    }
 
 
     private fun setupObservers() {
